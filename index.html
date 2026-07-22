@@ -465,64 +465,25 @@
 
   /* ---------- KONTAKT ---------- */
   .kontakt-inner{
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-  }
-  @media (max-width: 820px){
-    .kontakt-inner{ grid-template-columns: 1fr; gap: 40px; }
+    max-width: 46ch;
+    margin: 0 auto;
+    text-align: center;
   }
   .kontakt h2{
     font-family:'Space Grotesk', sans-serif;
     font-size: clamp(1.9rem, 4vw, 2.6rem);
     font-weight:600;
     letter-spacing:-0.01em;
-    max-width: 14ch;
   }
   .kontakt-copy{
     margin-top: 18px;
     color: var(--accent-ink);
-    max-width: 40ch;
     font-size: 1rem;
   }
-  .booking-btn{ margin-top: 22px; }
-  .kontakt-direct{ margin-top: 34px; font-size: 0.92rem; }
+  .booking-btn{ margin-top: 30px; }
+  .kontakt-direct{ margin: 34px auto 0; font-size: 0.92rem; width: fit-content; text-align:left; }
   .kontakt-direct div{ margin-bottom: 8px; }
   .kontakt-direct span{ color: var(--accent-ink); display:inline-block; width: 90px; }
-
-  form{ display:flex; flex-direction:column; gap: 16px; }
-  .field{ display:flex; flex-direction:column; gap: 6px; }
-  .field label{ font-size: 0.78rem; color: var(--accent-ink); }
-  .field input, .field textarea{
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 13px 14px;
-    font-family: inherit;
-    font-size: 0.94rem;
-    color: var(--ink);
-    resize: vertical;
-  }
-  .field input:focus, .field textarea:focus{
-    outline: none;
-    border-color: var(--accent);
-  }
-  .submit-btn{
-    margin-top: 6px;
-    align-self:flex-start;
-    background: var(--ink);
-    color: var(--paper);
-    padding: 15px 28px;
-    border: none;
-    border-radius: var(--radius);
-    font-family: inherit;
-    font-size: 0.92rem;
-    cursor:pointer;
-    transition: background .2s ease;
-  }
-  .submit-btn:hover{ background: var(--accent); }
-  .form-note{ font-size: 0.82rem; color: var(--accent-ink); margin-top: 4px; display:none; }
-  .form-note.show{ display:block; }
 
   /* ---------- FOOTER ---------- */
   footer{ padding: 44px 0; border-top: 1px solid var(--line); }
@@ -734,26 +695,6 @@
         <div><span>Standort</span>Wien, Österreich</div>
       </div>
     </div>
-    <form id="kontaktForm" class="reveal">
-      <div class="field">
-        <label for="name">Name</label>
-        <input id="name" name="name" type="text" required>
-      </div>
-      <div class="field">
-        <label for="email">E-Mail</label>
-        <input id="email" name="email" type="email" required>
-      </div>
-      <div class="field">
-        <label for="unternehmen">Unternehmen</label>
-        <input id="unternehmen" name="unternehmen" type="text">
-      </div>
-      <div class="field">
-        <label for="nachricht">Worum geht es?</label>
-        <textarea id="nachricht" name="nachricht" rows="4" required></textarea>
-      </div>
-      <button type="submit" class="submit-btn">Anfrage senden</button>
-      <div class="form-note" id="formNote">Danke — wir melden uns innerhalb von zwei Werktagen.</div>
-    </form>
   </div>
 </section>
 
@@ -896,15 +837,6 @@
   } else {
     countEls.forEach(runCount);
   }
-
-  // Contact form (no backend — confirmation only)
-  const form = document.getElementById('kontaktForm');
-  const note = document.getElementById('formNote');
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    note.classList.add('show');
-    form.reset();
-  });
 </script>
 
 </body>
