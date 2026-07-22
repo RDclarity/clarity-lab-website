@@ -510,6 +510,56 @@
   .kontakt-direct div{ margin-bottom: 8px; }
   .kontakt-direct span{ color: var(--accent-ink); display:inline-block; width: 90px; }
 
+  .kontakt-form{ max-width: 380px; margin: 44px auto 0; text-align: left; }
+  .kontakt-form form{ display:flex; flex-direction:column; gap: 16px; }
+  .kontakt-form .field{ display:flex; flex-direction:column; gap: 6px; }
+  .kontakt-form .field label{ font-size: 0.78rem; color: var(--accent-ink); }
+  .kontakt-form .field input[type="text"],
+  .kontakt-form .field input[type="tel"],
+  .kontakt-form .field input[type="email"]{
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 13px 14px;
+    font-family: inherit;
+    font-size: 0.94rem;
+    color: var(--ink);
+  }
+  .kontakt-form .field input:focus{ outline: none; border-color: var(--accent); }
+  .kontakt-form .field-checkbox label{
+    display:flex;
+    align-items:flex-start;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--slate);
+    cursor:pointer;
+  }
+  .kontakt-form .field-checkbox input{
+    margin-top: 3px;
+    width: 16px;
+    height: 16px;
+    accent-color: var(--accent);
+    flex-shrink: 0;
+  }
+  .kontakt-form .submit-btn{
+    margin-top: 6px;
+    align-self:flex-start;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 15px 28px;
+    border: none;
+    border-radius: var(--radius);
+    font-family: inherit;
+    font-size: 0.92rem;
+    cursor:pointer;
+    transition: background .2s ease;
+  }
+  .kontakt-form .submit-btn:hover{ background: var(--accent); }
+  .kontakt-form .submit-btn:disabled{ opacity: 0.6; cursor: not-allowed; }
+  .kontakt-form .form-note{ font-size: 0.82rem; color: var(--accent-ink); margin-top: 4px; display:none; }
+  .kontakt-form .form-note.show{ display:block; }
+  .kontakt-form .form-note.error{ color: #B3261E; }
+
   /* ---------- FOOTER ---------- */
   footer{ padding: 44px 0; border-top: 1px solid var(--line); }
   .footer-inner{
@@ -726,6 +776,30 @@
         <div><span data-i18n="kontakt.phone_label">Telefon</span>+43 660 3607188</div>
         <div><span data-i18n="kontakt.location_label">Standort</span>Royerstraße 7, 2482 Münchendorf</div>
       </div>
+      <div class="kontakt-form">
+        <form id="kontaktForm" novalidate>
+          <div class="field">
+            <label for="cf-name" data-i18n="kontakt.form_name">Name</label>
+            <input id="cf-name" name="name" type="text" required>
+          </div>
+          <div class="field">
+            <label for="cf-phone" data-i18n="kontakt.form_phone">Telefon</label>
+            <input id="cf-phone" name="phone" type="tel">
+          </div>
+          <div class="field">
+            <label for="cf-email" data-i18n="kontakt.form_email">E-Mail</label>
+            <input id="cf-email" name="email" type="email" required>
+          </div>
+          <div class="field field-checkbox">
+            <label>
+              <input type="checkbox" name="newsletter">
+              <span data-i18n="kontakt.form_newsletter">Ich möchte den Newsletter erhalten.</span>
+            </label>
+          </div>
+          <button type="submit" class="submit-btn" data-i18n="kontakt.form_submit">Anfrage senden</button>
+          <div class="form-note" id="formNote"></div>
+        </form>
+      </div>
     </div>
   </div>
 </section>
@@ -872,6 +946,9 @@
 </script>
 <script src="i18n.js"></script>
 <script src="chatbot.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="supabase-config.js"></script>
+<script src="contact-form.js"></script>
 
 </body>
 </html>

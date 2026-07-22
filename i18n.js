@@ -70,7 +70,14 @@
         book_btn: 'Termin buchen',
         email_label: 'E-Mail',
         phone_label: 'Telefon',
-        location_label: 'Standort'
+        location_label: 'Standort',
+        form_name: 'Name',
+        form_phone: 'Telefon',
+        form_email: 'E-Mail',
+        form_newsletter: 'Ich möchte den Newsletter erhalten.',
+        form_submit: 'Anfrage senden',
+        form_success: 'Danke — wir melden uns innerhalb von zwei Werktagen.',
+        form_error: 'Da ist etwas schiefgelaufen. Bitte versuche es erneut oder schreib uns direkt per E-Mail.'
       },
       footer: {
         copyright: '© 2026 Clarity Lab. Alle Rechte vorbehalten.',
@@ -155,7 +162,14 @@
         book_btn: 'Book a meeting',
         email_label: 'Email',
         phone_label: 'Phone',
-        location_label: 'Location'
+        location_label: 'Location',
+        form_name: 'Name',
+        form_phone: 'Phone',
+        form_email: 'Email',
+        form_newsletter: 'I would like to receive the newsletter.',
+        form_submit: 'Send inquiry',
+        form_success: "Thanks — we'll get back to you within two business days.",
+        form_error: 'Something went wrong. Please try again or email us directly.'
       },
       footer: {
         copyright: '© 2026 Clarity Lab. All rights reserved.',

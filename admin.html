@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin — Clarity Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #F6F7F4;
+    --paper-dim: #EEF0EC;
+    --ink: #15191C;
+    --slate: #5B6570;
+    --slate-light: #8B949C;
+    --line: #D9DED9;
+    --accent: #2456E5;
+    --accent-dim: #E6EBFB;
+    --accent-ink: #16337E;
+    --radius: 2px;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{
+    background: var(--paper);
+    color: var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    min-height:100vh;
+  }
+  .display{ font-family:'Space Grotesk', sans-serif; }
+  .mono{ font-family:'IBM Plex Mono', monospace; letter-spacing:0.04em; }
+
+  header{
+    border-bottom:1px solid var(--line);
+    padding:20px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .brand{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:1.05rem;
+  }
+  .brand .dot{ color: var(--accent); }
+  .brand-sub{ color: var(--slate); font-weight:400; font-size:0.9rem; margin-left:6px; }
+  #logoutBtn{
+    background:none;
+    border:1px solid var(--line);
+    color: var(--slate);
+    padding:8px 16px;
+    border-radius: var(--radius);
+    font-family:inherit;
+    font-size:0.82rem;
+    cursor:pointer;
+    display:none;
+  }
+  #logoutBtn:hover{ border-color: var(--accent); color: var(--accent); }
+
+  main{ max-width: 1040px; margin: 0 auto; padding: 48px 32px; }
+
+  /* ---------- LOGIN ---------- */
+  #loginView{ max-width: 360px; margin: 60px auto 0; }
+  #loginView h1{ font-size:1.4rem; font-weight:600; margin-bottom:24px; }
+  .field{ display:flex; flex-direction:column; gap:6px; margin-bottom:16px; }
+  .field label{ font-size:0.78rem; color: var(--accent-ink); }
+  .field input{
+    background: var(--paper);
+    border:1px solid var(--line);
+    border-radius: var(--radius);
+    padding:13px 14px;
+    font-family:inherit;
+    font-size:0.94rem;
+    color: var(--ink);
+  }
+  .field input:focus{ outline:none; border-color: var(--accent); }
+  #loginForm button{
+    width:100%;
+    background: var(--ink);
+    color: var(--paper);
+    padding:14px;
+    border:none;
+    border-radius: var(--radius);
+    font-family:inherit;
+    font-size:0.92rem;
+    cursor:pointer;
+    transition: background .2s ease;
+  }
+  #loginForm button:hover{ background: var(--accent); }
+  #loginForm button:disabled{ opacity:0.6; cursor:not-allowed; }
+  #loginNote{ font-size:0.85rem; color:#B3261E; margin-top:14px; display:none; }
+  #loginNote.show{ display:block; }
+  #configNote{
+    font-size:0.85rem;
+    color: var(--accent-ink);
+    background: var(--accent-dim);
+    padding:12px 14px;
+    border-radius: var(--radius);
+    margin-bottom:20px;
+    display:none;
+  }
+  #configNote.show{ display:block; }
+
+  /* ---------- DASHBOARD ---------- */
+  #dashboardView{ display:none; }
+  .panel-block{ margin-bottom:56px; }
+  .panel-block h2{
+    font-size:1.15rem;
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  .panel-block .count{ color: var(--slate); font-size:0.85rem; margin-bottom:20px; }
+  table{ width:100%; border-collapse: collapse; font-size:0.88rem; }
+  thead th{
+    text-align:left;
+    color: var(--slate);
+    font-size:0.74rem;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    padding: 10px 12px;
+    border-bottom:1px solid var(--line);
+  }
+  tbody td{
+    padding: 12px;
+    border-bottom:1px solid var(--line);
+    vertical-align:top;
+  }
+  tbody tr:hover{ background: var(--paper-dim); }
+  .tag-yes{ color: var(--accent-ink); }
+  .tag-no{ color: var(--slate-light); }
+  .empty-row td{ color: var(--slate-light); text-align:center; padding:24px; }
+  .loading-row td{ color: var(--slate-light); text-align:center; padding:24px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">Clarity<span class="dot">·</span>Lab<span class="brand-sub">Admin</span></div>
+  <button id="logoutBtn" type="button">Abmelden</button>
+</header>
+
+<main>
+  <div id="loginView">
+    <h1 class="display">Anmelden</h1>
+    <div id="configNote">Supabase ist noch nicht konfiguriert — trage Project URL und anon key in <span class="mono">supabase-config.js</span> ein.</div>
+    <form id="loginForm">
+      <div class="field">
+        <label for="admin-email">E-Mail</label>
+        <input id="admin-email" type="email" required autocomplete="username">
+      </div>
+      <div class="field">
+        <label for="admin-password">Passwort</label>
+        <input id="admin-password" type="password" required autocomplete="current-password">
+      </div>
+      <button type="submit">Anmelden</button>
+      <div id="loginNote"></div>
+    </form>
+  </div>
+
+  <div id="dashboardView">
+    <div class="panel-block">
+      <h2 class="display">Kontaktanfragen</h2>
+      <div class="count" id="contactsCount"></div>
+      <table>
+        <thead>
+          <tr><th>Name</th><th>E-Mail</th><th>Telefon</th><th>Newsletter</th><th>Datum</th></tr>
+        </thead>
+        <tbody id="contactsBody">
+          <tr class="loading-row"><td colspan="5">Lade…</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel-block">
+      <h2 class="display">Newsletter-Abonnenten</h2>
+      <div class="count" id="newsletterCount"></div>
+      <table>
+        <thead>
+          <tr><th>Name</th><th>E-Mail</th><th>Datum</th></tr>
+        </thead>
+        <tbody id="newsletterBody">
+          <tr class="loading-row"><td colspan="3">Lade…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="supabase-config.js"></script>
+<script>
+  var loginView = document.getElementById('loginView');
+  var dashboardView = document.getElementById('dashboardView');
+  var loginForm = document.getElementById('loginForm');
+  var loginNote = document.getElementById('loginNote');
+  var configNote = document.getElementById('configNote');
+  var logoutBtn = document.getElementById('logoutBtn');
+
+  var configured = window.CLARITY_SUPABASE
+    && window.CLARITY_SUPABASE.url
+    && window.CLARITY_SUPABASE.url.indexOf('YOUR_SUPABASE') === -1
+    && window.supabase;
+
+  if(!configured){
+    configNote.classList.add('show');
+    loginForm.querySelector('button').disabled = true;
+  }
+
+  var client = configured
+    ? window.supabase.createClient(window.CLARITY_SUPABASE.url, window.CLARITY_SUPABASE.anonKey)
+    : null;
+
+  function fmtDate(iso){
+    try{
+      return new Date(iso).toLocaleString('de-AT', { dateStyle:'medium', timeStyle:'short' });
+    } catch(e){ return iso; }
+  }
+
+  function escapeHtml(str){
+    var div = document.createElement('div');
+    div.textContent = str == null ? '' : String(str);
+    return div.innerHTML;
+  }
+
+  function renderContacts(rows){
+    var body = document.getElementById('contactsBody');
+    document.getElementById('contactsCount').textContent = rows.length + ' Einträge';
+    if(rows.length === 0){
+      body.innerHTML = '<tr class="empty-row"><td colspan="5">Noch keine Anfragen.</td></tr>';
+      return;
+    }
+    body.innerHTML = rows.map(function(r){
+      return '<tr>'
+        + '<td>' + escapeHtml(r.name) + '</td>'
+        + '<td>' + escapeHtml(r.email) + '</td>'
+        + '<td>' + escapeHtml(r.phone || '—') + '</td>'
+        + '<td class="' + (r.newsletter_opt_in ? 'tag-yes' : 'tag-no') + '">' + (r.newsletter_opt_in ? 'Ja' : 'Nein') + '</td>'
+        + '<td>' + fmtDate(r.created_at) + '</td>'
+        + '</tr>';
+    }).join('');
+  }
+
+  function renderNewsletter(rows){
+    var body = document.getElementById('newsletterBody');
+    document.getElementById('newsletterCount').textContent = rows.length + ' Abonnenten';
+    if(rows.length === 0){
+      body.innerHTML = '<tr class="empty-row"><td colspan="3">Noch keine Abonnenten.</td></tr>';
+      return;
+    }
+    body.innerHTML = rows.map(function(r){
+      return '<tr>'
+        + '<td>' + escapeHtml(r.name || '—') + '</td>'
+        + '<td>' + escapeHtml(r.email) + '</td>'
+        + '<td>' + fmtDate(r.created_at) + '</td>'
+        + '</tr>';
+    }).join('');
+  }
+
+  function loadData(){
+    client.from('contacts').select('*').order('created_at', { ascending:false })
+      .then(function(res){
+        if(res.error) throw res.error;
+        renderContacts(res.data || []);
+      }).catch(function(err){
+        console.error(err);
+        document.getElementById('contactsBody').innerHTML = '<tr class="empty-row"><td colspan="5">Fehler beim Laden.</td></tr>';
+      });
+
+    client.from('newsletter_subscribers').select('*').order('created_at', { ascending:false })
+      .then(function(res){
+        if(res.error) throw res.error;
+        renderNewsletter(res.data || []);
+      }).catch(function(err){
+        console.error(err);
+        document.getElementById('newsletterBody').innerHTML = '<tr class="empty-row"><td colspan="3">Fehler beim Laden.</td></tr>';
+      });
+  }
+
+  function showDashboard(){
+    loginView.style.display = 'none';
+    dashboardView.style.display = 'block';
+    logoutBtn.style.display = 'inline-block';
+    loadData();
+  }
+
+  function showLogin(){
+    loginView.style.display = 'block';
+    dashboardView.style.display = 'none';
+    logoutBtn.style.display = 'none';
+  }
+
+  if(client){
+    client.auth.getSession().then(function(res){
+      if(res.data && res.data.session){ showDashboard(); }
+    });
+
+    loginForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      var email = document.getElementById('admin-email').value.trim();
+      var password = document.getElementById('admin-password').value;
+      var btn = loginForm.querySelector('button');
+      btn.disabled = true;
+      loginNote.classList.remove('show');
+
+      client.auth.signInWithPassword({ email: email, password: password }).then(function(res){
+        if(res.error) throw res.error;
+        showDashboard();
+      }).catch(function(err){
+        loginNote.textContent = 'Anmeldung fehlgeschlagen. E-Mail oder Passwort falsch.';
+        loginNote.classList.add('show');
+      }).finally(function(){
+        btn.disabled = false;
+      });
+    });
+
+    logoutBtn.addEventListener('click', function(){
+      client.auth.signOut().then(function(){ showLogin(); });
+    });
+  }
+</script>
+
+</body>
+</html>
