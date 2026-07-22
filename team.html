@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Team — Clarity Lab</title>
+<title data-i18n="team_page.meta_title">Team — Clarity Lab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -115,6 +115,11 @@
     letter-spacing:-0.01em;
   }
   .brand .dot{ color: var(--accent); }
+  .nav-right{
+    display:flex;
+    align-items:center;
+    gap:28px;
+  }
   .nav-links{
     display:flex;
     gap:36px;
@@ -150,6 +155,26 @@
     transition: background .2s ease;
   }
   .nav-cta:hover{ background: var(--accent); }
+  .lang-switch{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.76rem;
+    letter-spacing:0.04em;
+  }
+  .lang-btn{
+    background:none;
+    border:none;
+    padding:4px 2px;
+    color: var(--slate);
+    cursor:pointer;
+    font: inherit;
+    transition: color .2s ease;
+  }
+  .lang-btn:hover{ color: var(--ink); }
+  .lang-btn.active{ color: var(--accent); font-weight:600; }
+  .lang-sep{ color: var(--line); }
   @media (max-width: 780px){
     .nav-links{ display:none; }
   }
@@ -289,22 +314,29 @@
 <header>
   <div class="wrap nav">
     <a href="index.html" class="brand">Clarity<span class="dot">·</span>Lab</a>
-    <nav class="nav-links">
-      <a href="index.html#methode">Methode</a>
-      <a href="index.html#leistungen">Leistungen</a>
-      <a href="index.html#ergebnisse">Ergebnisse</a>
-      <a href="index.html#ueber">Über uns</a>
-      <a href="team.html" class="current">Team</a>
-    </nav>
-    <a href="index.html#kontakt" class="nav-cta">Erstgespräch</a>
+    <div class="nav-right">
+      <nav class="nav-links">
+        <a href="index.html#methode" data-i18n="nav.methode">Methode</a>
+        <a href="index.html#leistungen" data-i18n="nav.leistungen">Leistungen</a>
+        <a href="index.html#ergebnisse" data-i18n="nav.ergebnisse">Ergebnisse</a>
+        <a href="index.html#ueber" data-i18n="nav.ueber">Über uns</a>
+        <a href="team.html" class="current" data-i18n="nav.team">Team</a>
+      </nav>
+      <div class="lang-switch">
+        <button type="button" class="lang-btn" data-lang="de">DE</button>
+        <span class="lang-sep">/</span>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      </div>
+      <a href="index.html#kontakt" class="nav-cta" data-i18n="nav.cta">Erstgespräch</a>
+    </div>
   </div>
 </header>
 
 <section class="hero">
   <div class="wrap">
-    <span class="eyebrow mono hero-item">TEAM — CLARITY LAB</span>
-    <h1 class="display hero-item">Die Menschen hinter der Methode.</h1>
-    <p class="hero-sub hero-item">Drei Perspektiven, ein Anspruch: Prozesse und Systeme so gestalten, dass sie im Alltag tatsächlich tragen.</p>
+    <span class="eyebrow mono hero-item" data-i18n="team_page.eyebrow">TEAM — CLARITY LAB</span>
+    <h1 class="display hero-item" data-i18n="team_page.h1">Die Menschen hinter der Methode.</h1>
+    <p class="hero-sub hero-item" data-i18n="team_page.sub">Drei Perspektiven, ein Anspruch: Prozesse und Systeme so gestalten, dass sie im Alltag tatsächlich tragen.</p>
   </div>
 </section>
 
@@ -314,17 +346,17 @@
       <div class="team-card">
         <div class="avatar mono">RD</div>
         <h3 class="display">Richard Dobrohruschka</h3>
-        <span class="role mono">Rolle folgt</span>
+        <span class="role mono" data-i18n="team_page.role_pending">Rolle folgt</span>
       </div>
       <div class="team-card">
         <div class="avatar mono">MK</div>
         <h3 class="display">Marko Katalan</h3>
-        <span class="role mono">Rolle folgt</span>
+        <span class="role mono" data-i18n="team_page.role_pending">Rolle folgt</span>
       </div>
       <div class="team-card">
         <div class="avatar mono">MS</div>
         <h3 class="display">Mihai Suta</h3>
-        <span class="role mono">Rolle folgt</span>
+        <span class="role mono" data-i18n="team_page.role_pending">Rolle folgt</span>
       </div>
     </div>
   </div>
@@ -332,10 +364,10 @@
 
 <footer>
   <div class="wrap footer-inner">
-    <span>© 2026 Clarity Lab. Alle Rechte vorbehalten.</span>
+    <span data-i18n="footer.copyright">© 2026 Clarity Lab. Alle Rechte vorbehalten.</span>
     <div class="footer-links">
-      <a href="#">Impressum</a>
-      <a href="#">Datenschutz</a>
+      <a href="#" data-i18n="footer.impressum">Impressum</a>
+      <a href="#" data-i18n="footer.datenschutz">Datenschutz</a>
     </div>
   </div>
 </footer>
@@ -379,6 +411,7 @@
     revealEls.forEach(activate);
   }
 </script>
+<script src="i18n.js"></script>
 <script src="chatbot.js" defer></script>
 
 </body>

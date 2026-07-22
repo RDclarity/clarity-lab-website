@@ -1,44 +1,109 @@
 (function(){
   var BOOKING_URL = 'https://outlook.office.com/bookwithme/user/dc79bf543acd4612bd3cd71f5b078ae2@tischlerkultur.onmicrosoft.com/meetingtype/Lf7qqrACrkGmDArzLF0Lvw2?anonymous&ismsaljsauthenabled&ep=mlink';
 
-  var FAQS = [
-    {
-      label: 'Über Clarity Lab',
-      keywords: ['was ist', 'über euch', 'über clarity', 'firma', 'unternehmen', 'wer seid ihr'],
-      answer: 'Clarity Lab ist eine Prozess- und Systemberatung aus Österreich. Wir bringen Ordnung in Komplexität — mit der Präzision eines Labors und dem Pragmatismus der Praxis. Unsere Grundsätze: Beobachten vor Bewerten, System vor Symptom, mit dem Team statt über es, Wirkung vor Bericht.'
+  var UI = {
+    de: {
+      title: 'Clarity·Lab Assistent',
+      closeAria: 'Chat schließen',
+      openAria: 'Chat öffnen',
+      placeholder: 'Frage eingeben…',
+      inputAria: 'Nachricht',
+      send: 'Senden',
+      bookingChip: 'Termin buchen',
+      greeting: 'Hallo! Ich bin der Clarity·Lab Assistent. Frag mich etwas über die Firma oder unsere Leistungen — oder wähl unten eine Frage.',
+      fallback: 'Das habe ich leider nicht ganz verstanden. Wähle unten eine Frage aus, oder vereinbare direkt ein unverbindliches Erstgespräch.'
     },
-    {
-      label: 'Unsere Leistungen',
-      keywords: ['leistung', 'angebot', 'service', 'was bietet'],
-      answer: 'Wir arbeiten an: <ul><li>Prozessanalyse — Ist-Aufnahme entlang der Wertschöpfungskette</li><li>Systemarchitektur — Software, die sich am Prozess orientiert</li><li>Organisationsdesign — klare Rollen &amp; Entscheidungswege</li><li>Change-Begleitung — Einführung gemeinsam mit dem Team</li><li>Kennzahlen &amp; Steuerung — Messgrößen, die zählen</li><li>Interim-Mandate — temporäre operative Führung</li></ul>'
-    },
-    {
-      label: 'Unsere Methode',
-      keywords: ['methode', 'prozess ab', 'ablauf', 'wie arbeitet', 'vorgehen'],
-      answer: 'Drei Phasen, kein Blindflug:<br>1. <strong>Diagnose</strong> — Abläufe, Schnittstellen und Engpässe kartieren.<br>2. <strong>Neugestaltung</strong> — schlankere Prozesse, klare Verantwortlichkeiten.<br>3. <strong>Umsetzung</strong> — Begleitung bis die neuen Abläufe im Alltag tragen.'
-    },
-    {
-      label: 'Ergebnisse',
-      keywords: ['ergebnis', 'erfolg', 'zahlen', 'statistik', 'referenz'],
-      answer: 'In Zahlen: <strong>40+</strong> begleitete Transformationen, <strong>90 Tage</strong> bis zur ersten messbaren Wirkung, durchschnittlich <strong>−34%</strong> Durchlaufzeit.'
-    },
-    {
-      label: 'Unser Team',
-      keywords: ['team', 'mitarbeiter', 'wer arbeitet'],
-      answer: 'Im Team: Richard Dobrohruschka, Marko Katalan und Mihai Suta. <a href="team.html">Mehr zum Team →</a>'
-    },
-    {
-      label: 'Kontakt & Adresse',
-      keywords: ['kontakt', 'email', 'e-mail', 'telefon', 'adresse', 'erreichen', 'standort'],
-      answer: 'E-Mail: inquiry@clarity-lab.com<br>Telefon: +43 660 3607188<br>Adresse: Royerstraße 7, 2482 Münchendorf<br><br>Am schnellsten geht’s mit einem direkten Termin — Button „Termin buchen“ unten.'
-    },
-    {
-      label: 'Termin vereinbaren',
-      hideChip: true,
-      keywords: ['termin', 'buchen', 'meeting', 'gespräch', 'vereinbaren', 'erstgespräch'],
-      answer: 'Am einfachsten direkt hier buchen: <a href="' + BOOKING_URL + '" target="_blank" rel="noopener noreferrer">Termin-Kalender öffnen →</a>'
+    en: {
+      title: 'Clarity·Lab Assistant',
+      closeAria: 'Close chat',
+      openAria: 'Open chat',
+      placeholder: 'Type a question…',
+      inputAria: 'Message',
+      send: 'Send',
+      bookingChip: 'Book a meeting',
+      greeting: "Hello! I'm the Clarity·Lab Assistant. Ask me something about the company or our services — or pick a question below.",
+      fallback: "Sorry, I didn't quite catch that. Pick a question below, or schedule a free, no-obligation consultation directly."
     }
-  ];
+  };
+
+  var FAQS = {
+    de: [
+      {
+        label: 'Über Clarity Lab',
+        keywords: ['was ist', 'über euch', 'über clarity', 'firma', 'unternehmen', 'wer seid ihr'],
+        answer: 'Clarity Lab ist eine Prozess- und Systemberatung aus Österreich. Wir bringen Ordnung in Komplexität — mit der Präzision eines Labors und dem Pragmatismus der Praxis. Unsere Grundsätze: Beobachten vor Bewerten, System vor Symptom, mit dem Team statt über es, Wirkung vor Bericht.'
+      },
+      {
+        label: 'Unsere Leistungen',
+        keywords: ['leistung', 'angebot', 'service', 'was bietet'],
+        answer: 'Wir arbeiten an: <ul><li>Prozessanalyse — Ist-Aufnahme entlang der Wertschöpfungskette</li><li>Systemarchitektur — Software, die sich am Prozess orientiert</li><li>Organisationsdesign — klare Rollen &amp; Entscheidungswege</li><li>Change-Begleitung — Einführung gemeinsam mit dem Team</li><li>Kennzahlen &amp; Steuerung — Messgrößen, die zählen</li><li>Interim-Mandate — temporäre operative Führung</li></ul>'
+      },
+      {
+        label: 'Unsere Methode',
+        keywords: ['methode', 'prozess ab', 'ablauf', 'wie arbeitet', 'vorgehen'],
+        answer: 'Drei Phasen, kein Blindflug:<br>1. <strong>Diagnose</strong> — Abläufe, Schnittstellen und Engpässe kartieren.<br>2. <strong>Neugestaltung</strong> — schlankere Prozesse, klare Verantwortlichkeiten.<br>3. <strong>Umsetzung</strong> — Begleitung bis die neuen Abläufe im Alltag tragen.'
+      },
+      {
+        label: 'Ergebnisse',
+        keywords: ['ergebnis', 'erfolg', 'zahlen', 'statistik', 'referenz'],
+        answer: 'In Zahlen: <strong>40+</strong> begleitete Transformationen, <strong>90 Tage</strong> bis zur ersten messbaren Wirkung, durchschnittlich <strong>−34%</strong> Durchlaufzeit.'
+      },
+      {
+        label: 'Unser Team',
+        keywords: ['team', 'mitarbeiter', 'wer arbeitet'],
+        answer: 'Im Team: Richard Dobrohruschka, Marko Katalan und Mihai Suta. <a href="team.html">Mehr zum Team →</a>'
+      },
+      {
+        label: 'Kontakt & Adresse',
+        keywords: ['kontakt', 'email', 'e-mail', 'telefon', 'adresse', 'erreichen', 'standort'],
+        answer: 'E-Mail: inquiry@clarity-lab.com<br>Telefon: +43 660 3607188<br>Adresse: Royerstraße 7, 2482 Münchendorf<br><br>Am schnellsten geht’s mit einem direkten Termin — Button „Termin buchen“ unten.'
+      },
+      {
+        label: 'Termin vereinbaren',
+        hideChip: true,
+        keywords: ['termin', 'buchen', 'meeting', 'gespräch', 'vereinbaren', 'erstgespräch'],
+        answer: 'Am einfachsten direkt hier buchen: <a href="' + BOOKING_URL + '" target="_blank" rel="noopener noreferrer">Termin-Kalender öffnen →</a>'
+      }
+    ],
+    en: [
+      {
+        label: 'About Clarity Lab',
+        keywords: ['what is', 'about you', 'about clarity', 'company', 'who are you'],
+        answer: 'Clarity Lab is a process and systems consultancy from Austria. We bring order to complexity — with the precision of a lab and the pragmatism of practice. Our principles: observe before judging, system over symptom, with the team rather than over it, impact over reporting.'
+      },
+      {
+        label: 'Our Services',
+        keywords: ['service', 'offer', 'what do you do'],
+        answer: 'We work on: <ul><li>Process Analysis — current-state assessment across the value chain</li><li>System Architecture — software that follows the process</li><li>Organizational Design — clear roles &amp; decision paths</li><li>Change Management — rollout together with the team</li><li>Metrics &amp; Governance — metrics that matter</li><li>Interim Management — temporary operational leadership</li></ul>'
+      },
+      {
+        label: 'Our Method',
+        keywords: ['method', 'process work', 'how do you work', 'approach'],
+        answer: 'Three phases, no guesswork:<br>1. <strong>Diagnosis</strong> — mapping workflows, interfaces, and bottlenecks.<br>2. <strong>Redesign</strong> — leaner processes, clear responsibilities.<br>3. <strong>Implementation</strong> — support until the new workflows hold up day to day.'
+      },
+      {
+        label: 'Results',
+        keywords: ['result', 'success', 'numbers', 'stats', 'reference'],
+        answer: 'In numbers: <strong>40+</strong> guided transformations, <strong>90 days</strong> to first measurable impact, an average <strong>−34%</strong> reduction in lead time.'
+      },
+      {
+        label: 'Our Team',
+        keywords: ['team', 'staff', 'who works there'],
+        answer: 'On the team: Richard Dobrohruschka, Marko Katalan, and Mihai Suta. <a href="team.html">More about the team →</a>'
+      },
+      {
+        label: 'Contact & Address',
+        keywords: ['contact', 'email', 'phone', 'address', 'reach you', 'location'],
+        answer: 'Email: inquiry@clarity-lab.com<br>Phone: +43 660 3607188<br>Address: Royerstraße 7, 2482 Münchendorf, Austria<br><br>Fastest way is a direct booking — use the "Book a meeting" button below.'
+      },
+      {
+        label: 'Schedule an appointment',
+        hideChip: true,
+        keywords: ['appointment', 'book', 'meeting', 'schedule', 'consultation'],
+        answer: 'Easiest way is to book directly here: <a href="' + BOOKING_URL + '" target="_blank" rel="noopener noreferrer">Open booking calendar →</a>'
+      }
+    ]
+  };
 
   var css = ''
     + '.cl-chat-toggle{position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:var(--ink);color:var(--paper);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 12px 28px -12px rgba(20,30,60,0.45);z-index:200;transition:background .2s ease;}'
@@ -75,20 +140,20 @@
 
   var toggle = document.createElement('button');
   toggle.className = 'cl-chat-toggle';
-  toggle.setAttribute('aria-label', 'Chat öffnen');
   toggle.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>';
 
   var panel = document.createElement('div');
   panel.className = 'cl-chat-panel';
   panel.innerHTML = ''
-    + '<div class="cl-chat-header"><span>Clarity·Lab Assistent</span><button class="cl-chat-close" aria-label="Chat schließen">×</button></div>'
+    + '<div class="cl-chat-header"><span class="cl-title"></span><button class="cl-chat-close">×</button></div>'
     + '<div class="cl-chat-messages"></div>'
     + '<div class="cl-chips"></div>'
-    + '<div class="cl-chat-inputrow"><input type="text" placeholder="Frage eingeben…" aria-label="Nachricht"><button type="button">Senden</button></div>';
+    + '<div class="cl-chat-inputrow"><input type="text"><button type="button"></button></div>';
 
   document.body.appendChild(toggle);
   document.body.appendChild(panel);
 
+  var titleEl = panel.querySelector('.cl-title');
   var messagesEl = panel.querySelector('.cl-chat-messages');
   var chipsEl = panel.querySelector('.cl-chips');
   var inputEl = panel.querySelector('input');
@@ -96,6 +161,23 @@
   var closeBtn = panel.querySelector('.cl-chat-close');
 
   var initialized = false;
+
+  function getLang(){
+    return localStorage.getItem('clarity_lang') || 'de';
+  }
+
+  function ui(){ return UI[getLang()] || UI.de; }
+  function faqs(){ return FAQS[getLang()] || FAQS.de; }
+
+  function applyChrome(){
+    var strings = ui();
+    titleEl.textContent = strings.title;
+    closeBtn.setAttribute('aria-label', strings.closeAria);
+    toggle.setAttribute('aria-label', strings.openAria);
+    inputEl.placeholder = strings.placeholder;
+    inputEl.setAttribute('aria-label', strings.inputAria);
+    sendBtn.textContent = strings.send;
+  }
 
   function addMessage(text, from){
     var div = document.createElement('div');
@@ -107,7 +189,7 @@
 
   function renderMenu(){
     chipsEl.innerHTML = '';
-    FAQS.filter(function(faq){ return !faq.hideChip; }).forEach(function(faq){
+    faqs().filter(function(faq){ return !faq.hideChip; }).forEach(function(faq){
       var chip = document.createElement('button');
       chip.className = 'cl-chip';
       chip.type = 'button';
@@ -121,7 +203,7 @@
     var bookingChip = document.createElement('button');
     bookingChip.className = 'cl-chip cl-chip-primary';
     bookingChip.type = 'button';
-    bookingChip.textContent = 'Termin buchen';
+    bookingChip.textContent = ui().bookingChip;
     bookingChip.addEventListener('click', function(){
       window.open(BOOKING_URL, '_blank', 'noopener');
     });
@@ -133,13 +215,13 @@
     if(!trimmed) return;
     addMessage(trimmed, 'user');
     var lower = trimmed.toLowerCase();
-    var match = FAQS.find(function(faq){
+    var match = faqs().find(function(faq){
       return faq.keywords.some(function(kw){ return lower.indexOf(kw) !== -1; });
     });
     if(match){
       addMessage(match.answer, 'bot');
     } else {
-      addMessage('Das habe ich leider nicht ganz verstanden. Wähle unten eine Frage aus, oder vereinbare direkt ein unverbindliches Erstgespräch.', 'bot');
+      addMessage(ui().fallback, 'bot');
     }
   }
 
@@ -147,7 +229,7 @@
     panel.classList.add('open');
     if(!initialized){
       initialized = true;
-      addMessage('Hallo! Ich bin der Clarity·Lab Assistent. Frag mich etwas über die Firma oder unsere Leistungen — oder wähl unten eine Frage.', 'bot');
+      addMessage(ui().greeting, 'bot');
       renderMenu();
     }
     inputEl.focus();
@@ -171,4 +253,11 @@
       inputEl.value = '';
     }
   });
+
+  window.addEventListener('clarity:langchange', function(){
+    applyChrome();
+    if(initialized) renderMenu();
+  });
+
+  applyChrome();
 })();

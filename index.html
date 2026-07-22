@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clarity Lab — Prozess- und Systemberatung</title>
+<title data-i18n="meta.title">Clarity Lab — Prozess- und Systemberatung</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -115,6 +115,11 @@
     letter-spacing:-0.01em;
   }
   .brand .dot{ color: var(--accent); }
+  .nav-right{
+    display:flex;
+    align-items:center;
+    gap:28px;
+  }
   .nav-links{
     display:flex;
     gap:36px;
@@ -148,6 +153,26 @@
     transition: background .2s ease;
   }
   .nav-cta:hover{ background: var(--accent); }
+  .lang-switch{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.76rem;
+    letter-spacing:0.04em;
+  }
+  .lang-btn{
+    background:none;
+    border:none;
+    padding:4px 2px;
+    color: var(--slate);
+    cursor:pointer;
+    font: inherit;
+    transition: color .2s ease;
+  }
+  .lang-btn:hover{ color: var(--ink); }
+  .lang-btn.active{ color: var(--accent); font-weight:600; }
+  .lang-sep{ color: var(--line); }
   @media (max-width: 780px){
     .nav-links{ display:none; }
   }
@@ -507,30 +532,37 @@
 <header>
   <div class="wrap nav">
     <a href="#" class="brand">Clarity<span class="dot">·</span>Lab</a>
-    <nav class="nav-links">
-      <a href="#methode">Methode</a>
-      <a href="#leistungen">Leistungen</a>
-      <a href="#ergebnisse">Ergebnisse</a>
-      <a href="#ueber">Über uns</a>
-      <a href="team.html">Team</a>
-    </nav>
-    <a href="#kontakt" class="nav-cta">Erstgespräch</a>
+    <div class="nav-right">
+      <nav class="nav-links">
+        <a href="#methode" data-i18n="nav.methode">Methode</a>
+        <a href="#leistungen" data-i18n="nav.leistungen">Leistungen</a>
+        <a href="#ergebnisse" data-i18n="nav.ergebnisse">Ergebnisse</a>
+        <a href="#ueber" data-i18n="nav.ueber">Über uns</a>
+        <a href="team.html" data-i18n="nav.team">Team</a>
+      </nav>
+      <div class="lang-switch">
+        <button type="button" class="lang-btn" data-lang="de">DE</button>
+        <span class="lang-sep">/</span>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      </div>
+      <a href="#kontakt" class="nav-cta" data-i18n="nav.cta">Erstgespräch</a>
+    </div>
   </div>
 </header>
 
 <section class="hero" data-bg="#F6F7F4">
   <div class="wrap">
-    <span class="eyebrow mono hero-item">CLARITY LAB — PROZESS- UND SYSTEMBERATUNG</span>
-    <h1 class="display hero-item">Klarheit ist keine Frage des Talents. Sie ist ein <em>Prozess</em>.</h1>
-    <p class="hero-sub hero-item">Wir analysieren, wie Ihr Unternehmen wirklich arbeitet — und bauen Prozesse und Systeme, die diese Arbeit tragen, statt sie zu bremsen.</p>
+    <span class="eyebrow mono hero-item" data-i18n="hero.eyebrow">CLARITY LAB — PROZESS- UND SYSTEMBERATUNG</span>
+    <h1 class="display hero-item" data-i18n-html="hero.h1_html">Klarheit ist keine Frage des Talents. Sie ist ein <em>Prozess</em>.</h1>
+    <p class="hero-sub hero-item" data-i18n="hero.sub">Wir analysieren, wie Ihr Unternehmen wirklich arbeitet — und bauen Prozesse und Systeme, die diese Arbeit tragen, statt sie zu bremsen.</p>
     <div class="hero-cta hero-item">
-      <a href="#kontakt" class="btn-primary">Erstgespräch vereinbaren</a>
-      <a href="#methode" class="link-secondary">Unsere Methode ansehen<span class="arrow">→</span></a>
+      <a href="#kontakt" class="btn-primary" data-i18n="hero.cta1">Erstgespräch vereinbaren</a>
+      <a href="#methode" class="link-secondary"><span data-i18n="hero.cta2">Unsere Methode ansehen</span><span class="arrow">→</span></a>
     </div>
     <div class="hero-meta hero-item">
-      <div><strong data-count="40" data-suffix="+">0</strong>begleitete Transformationen</div>
-      <div><strong data-count="90" data-suffix=" Tage">0</strong>bis zur ersten messbaren Wirkung</div>
-      <div><strong data-count="34" data-prefix="−" data-suffix="%">0</strong>Durchlaufzeit im Schnitt</div>
+      <div><strong data-count="40" data-suffix="+">0</strong><span data-i18n="hero.meta1">begleitete Transformationen</span></div>
+      <div><strong data-count="90" data-suffix=" Tage" data-i18n-suffix="common.day_suffix">0</strong><span data-i18n="hero.meta2">bis zur ersten messbaren Wirkung</span></div>
+      <div><strong data-count="34" data-prefix="−" data-suffix="%">0</strong><span data-i18n="hero.meta3">Durchlaufzeit im Schnitt</span></div>
     </div>
   </div>
 </section>
@@ -547,28 +579,28 @@
   <div class="wrap">
     <div class="section-head reveal">
       <div>
-        <div class="section-label mono">01 — METHODE</div>
-        <h2 class="display">Drei Phasen. Kein Blindflug.</h2>
+        <div class="section-label mono" data-i18n="methode.label">01 — METHODE</div>
+        <h2 class="display" data-i18n="methode.h2">Drei Phasen. Kein Blindflug.</h2>
       </div>
-      <p>Jedes Mandat folgt derselben Reihenfolge — weil Klarheit erst entsteht, wenn Diagnose vor Lösung kommt.</p>
+      <p data-i18n="methode.p">Jedes Mandat folgt derselben Reihenfolge — weil Klarheit erst entsteht, wenn Diagnose vor Lösung kommt.</p>
     </div>
   </div>
   <div class="wrap">
     <div class="steps reveal" data-stagger>
       <div class="step">
         <span class="num mono">01</span>
-        <h3 class="display">Diagnose</h3>
-        <p>Wir kartieren Abläufe, Schnittstellen und Engpässe — nicht auf Basis von Organigrammen, sondern von dem, was im Alltag tatsächlich passiert.</p>
+        <h3 class="display" data-i18n="methode.step1_h">Diagnose</h3>
+        <p data-i18n="methode.step1_p">Wir kartieren Abläufe, Schnittstellen und Engpässe — nicht auf Basis von Organigrammen, sondern von dem, was im Alltag tatsächlich passiert.</p>
       </div>
       <div class="step">
         <span class="num mono">02</span>
-        <h3 class="display">Neugestaltung</h3>
-        <p>Aus der Diagnose entsteht ein Zielbild: schlankere Prozesse, klare Verantwortlichkeiten, Systeme, die zur Arbeit passen.</p>
+        <h3 class="display" data-i18n="methode.step2_h">Neugestaltung</h3>
+        <p data-i18n="methode.step2_p">Aus der Diagnose entsteht ein Zielbild: schlankere Prozesse, klare Verantwortlichkeiten, Systeme, die zur Arbeit passen.</p>
       </div>
       <div class="step">
         <span class="num mono">03</span>
-        <h3 class="display">Umsetzung</h3>
-        <p>Wir begleiten die Einführung, bis die neuen Abläufe im Alltag tragen — nicht nur auf dem Papier stehen.</p>
+        <h3 class="display" data-i18n="methode.step3_h">Umsetzung</h3>
+        <p data-i18n="methode.step3_p">Wir begleiten die Einführung, bis die neuen Abläufe im Alltag tragen — nicht nur auf dem Papier stehen.</p>
       </div>
     </div>
   </div>
@@ -578,43 +610,43 @@
   <div class="wrap">
     <div class="section-head reveal">
       <div>
-        <div class="section-label mono">02 — LEISTUNGEN</div>
-        <h2 class="display">Woran wir konkret arbeiten</h2>
+        <div class="section-label mono" data-i18n="leistungen.label">02 — LEISTUNGEN</div>
+        <h2 class="display" data-i18n="leistungen.h2">Woran wir konkret arbeiten</h2>
       </div>
-      <p>Von der ersten Bestandsaufnahme bis zur operativen Begleitung im Alltag.</p>
+      <p data-i18n="leistungen.p">Von der ersten Bestandsaufnahme bis zur operativen Begleitung im Alltag.</p>
     </div>
   </div>
   <div class="wrap">
     <div class="services reveal" data-stagger>
       <div class="service">
         <span class="tag mono">/ 01</span>
-        <h3 class="display">Prozessanalyse</h3>
-        <p>Ist-Aufnahme und Schwachstellenidentifikation entlang der gesamten Wertschöpfungskette.</p>
+        <h3 class="display" data-i18n="leistungen.s1_h">Prozessanalyse</h3>
+        <p data-i18n="leistungen.s1_p">Ist-Aufnahme und Schwachstellenidentifikation entlang der gesamten Wertschöpfungskette.</p>
       </div>
       <div class="service">
         <span class="tag mono">/ 02</span>
-        <h3 class="display">Systemarchitektur</h3>
-        <p>Auswahl und Integration von Software, die sich am Prozess orientiert — nicht umgekehrt.</p>
+        <h3 class="display" data-i18n="leistungen.s2_h">Systemarchitektur</h3>
+        <p data-i18n="leistungen.s2_p">Auswahl und Integration von Software, die sich am Prozess orientiert — nicht umgekehrt.</p>
       </div>
       <div class="service">
         <span class="tag mono">/ 03</span>
-        <h3 class="display">Organisationsdesign</h3>
-        <p>Klare Rollen, Verantwortlichkeiten und Entscheidungswege statt informeller Umwege.</p>
+        <h3 class="display" data-i18n="leistungen.s3_h">Organisationsdesign</h3>
+        <p data-i18n="leistungen.s3_p">Klare Rollen, Verantwortlichkeiten und Entscheidungswege statt informeller Umwege.</p>
       </div>
       <div class="service">
         <span class="tag mono">/ 04</span>
-        <h3 class="display">Change-Begleitung</h3>
-        <p>Einführung neuer Abläufe gemeinsam mit dem Team — nicht an ihm vorbei.</p>
+        <h3 class="display" data-i18n="leistungen.s4_h">Change-Begleitung</h3>
+        <p data-i18n="leistungen.s4_p">Einführung neuer Abläufe gemeinsam mit dem Team — nicht an ihm vorbei.</p>
       </div>
       <div class="service">
         <span class="tag mono">/ 05</span>
-        <h3 class="display">Kennzahlen &amp; Steuerung</h3>
-        <p>Messgrößen, die tatsächlich über Erfolg entscheiden, statt Reporting um seiner selbst willen.</p>
+        <h3 class="display" data-i18n="leistungen.s5_h">Kennzahlen &amp; Steuerung</h3>
+        <p data-i18n="leistungen.s5_p">Messgrößen, die tatsächlich über Erfolg entscheiden, statt Reporting um seiner selbst willen.</p>
       </div>
       <div class="service">
         <span class="tag mono">/ 06</span>
-        <h3 class="display">Interim-Mandate</h3>
-        <p>Temporäre operative Führung in Transformationsphasen, wenn intern die Kapazität fehlt.</p>
+        <h3 class="display" data-i18n="leistungen.s6_h">Interim-Mandate</h3>
+        <p data-i18n="leistungen.s6_p">Temporäre operative Führung in Transformationsphasen, wenn intern die Kapazität fehlt.</p>
       </div>
     </div>
   </div>
@@ -632,23 +664,23 @@
   <div class="wrap">
     <div class="section-head reveal">
       <div>
-        <div class="section-label mono">03 — ERGEBNISSE</div>
-        <h2 class="display">Was am Ende zählt</h2>
+        <div class="section-label mono" data-i18n="ergebnisse.label">03 — ERGEBNISSE</div>
+        <h2 class="display" data-i18n="ergebnisse.h2">Was am Ende zählt</h2>
       </div>
-      <p>Wirkung, die sich messen lässt — nicht nur beschreiben.</p>
+      <p data-i18n="ergebnisse.p">Wirkung, die sich messen lässt — nicht nur beschreiben.</p>
     </div>
     <div class="stats reveal" data-stagger>
       <div class="stat">
         <div class="figure display" data-count="34" data-prefix="−" data-suffix="%">0%</div>
-        <div class="label">durchschnittliche Reduktion der Durchlaufzeit</div>
+        <div class="label" data-i18n="ergebnisse.stat1">durchschnittliche Reduktion der Durchlaufzeit</div>
       </div>
       <div class="stat">
-        <div class="figure display" data-count="90" data-suffix=" Tage">0 Tage</div>
-        <div class="label">bis zur ersten messbaren Wirkung im Betrieb</div>
+        <div class="figure display" data-count="90" data-suffix=" Tage" data-i18n-suffix="common.day_suffix">0 Tage</div>
+        <div class="label" data-i18n="ergebnisse.stat2">bis zur ersten messbaren Wirkung im Betrieb</div>
       </div>
       <div class="stat">
         <div class="figure display" data-count="40" data-suffix="+">0+</div>
-        <div class="label">begleitete Transformationen seit Gründung</div>
+        <div class="label" data-i18n="ergebnisse.stat3">begleitete Transformationen seit Gründung</div>
       </div>
     </div>
   </div>
@@ -657,26 +689,26 @@
 <section id="ueber" class="ueber" data-bg="#F6F7F4">
   <div class="wrap">
     <div class="ueber-text reveal">
-      <div class="section-label mono">04 — ÜBER UNS</div>
-      <p>Clarity Lab wurde gegründet, um eine einfache Beobachtung ernst zu nehmen: Die meisten Unternehmen scheitern nicht an fehlenden Ideen, sondern an Prozessen, die niemand mehr vollständig versteht.</p>
-      <p>Wir bringen Ordnung in Komplexität — mit der Präzision eines Labors und dem Pragmatismus der Praxis. Kein Berater-Vokabular, keine Folienschlachten. Nur Prozesse und Systeme, die im Alltag tatsächlich tragen.</p>
+      <div class="section-label mono" data-i18n="ueber.label">04 — ÜBER UNS</div>
+      <p data-i18n="ueber.p1">Clarity Lab wurde gegründet, um eine einfache Beobachtung ernst zu nehmen: Die meisten Unternehmen scheitern nicht an fehlenden Ideen, sondern an Prozessen, die niemand mehr vollständig versteht.</p>
+      <p data-i18n="ueber.p2">Wir bringen Ordnung in Komplexität — mit der Präzision eines Labors und dem Pragmatismus der Praxis. Kein Berater-Vokabular, keine Folienschlachten. Nur Prozesse und Systeme, die im Alltag tatsächlich tragen.</p>
     </div>
     <div class="principles reveal" data-stagger>
       <div class="principle">
-        <span class="p-name display">Beobachten vor Bewerten</span>
-        <span class="p-desc">Wir verstehen den Ist-Zustand, bevor wir ihn verändern.</span>
+        <span class="p-name display" data-i18n="ueber.pr1_name">Beobachten vor Bewerten</span>
+        <span class="p-desc" data-i18n="ueber.pr1_desc">Wir verstehen den Ist-Zustand, bevor wir ihn verändern.</span>
       </div>
       <div class="principle">
-        <span class="p-name display">System vor Symptom</span>
-        <span class="p-desc">Wir lösen Ursachen, nicht Einzelfälle.</span>
+        <span class="p-name display" data-i18n="ueber.pr2_name">System vor Symptom</span>
+        <span class="p-desc" data-i18n="ueber.pr2_desc">Wir lösen Ursachen, nicht Einzelfälle.</span>
       </div>
       <div class="principle">
-        <span class="p-name display">Mit dem Team, nicht über es</span>
-        <span class="p-desc">Veränderung trägt nur, was gemeinsam entsteht.</span>
+        <span class="p-name display" data-i18n="ueber.pr3_name">Mit dem Team, nicht über es</span>
+        <span class="p-desc" data-i18n="ueber.pr3_desc">Veränderung trägt nur, was gemeinsam entsteht.</span>
       </div>
       <div class="principle">
-        <span class="p-name display">Wirkung vor Bericht</span>
-        <span class="p-desc">Erfolg zeigt sich im Alltag, nicht in der Präsentation.</span>
+        <span class="p-name display" data-i18n="ueber.pr4_name">Wirkung vor Bericht</span>
+        <span class="p-desc" data-i18n="ueber.pr4_desc">Erfolg zeigt sich im Alltag, nicht in der Präsentation.</span>
       </div>
     </div>
   </div>
@@ -685,14 +717,14 @@
 <section id="kontakt" class="kontakt" data-bg="#E6EBFB">
   <div class="wrap kontakt-inner">
     <div class="reveal">
-      <div class="section-label mono">05 — KONTAKT</div>
-      <h2>Bereit für Klarheit?</h2>
-      <p class="kontakt-copy">Ein erstes Gespräch dauert 30 Minuten und zeigt, ob und wo wir ansetzen sollten. Unverbindlich.</p>
-      <a href="https://outlook.office.com/bookwithme/user/dc79bf543acd4612bd3cd71f5b078ae2@tischlerkultur.onmicrosoft.com/meetingtype/Lf7qqrACrkGmDArzLF0Lvw2?anonymous&ismsaljsauthenabled&ep=mlink" target="_blank" rel="noopener noreferrer" class="btn-primary booking-btn">Termin buchen</a>
+      <div class="section-label mono" data-i18n="kontakt.label">05 — KONTAKT</div>
+      <h2 data-i18n="kontakt.h2">Bereit für Klarheit?</h2>
+      <p class="kontakt-copy" data-i18n="kontakt.copy">Ein erstes Gespräch dauert 30 Minuten und zeigt, ob und wo wir ansetzen sollten. Unverbindlich.</p>
+      <a href="https://outlook.office.com/bookwithme/user/dc79bf543acd4612bd3cd71f5b078ae2@tischlerkultur.onmicrosoft.com/meetingtype/Lf7qqrACrkGmDArzLF0Lvw2?anonymous&ismsaljsauthenabled&ep=mlink" target="_blank" rel="noopener noreferrer" class="btn-primary booking-btn" data-i18n="kontakt.book_btn">Termin buchen</a>
       <div class="kontakt-direct">
-        <div><span>E-Mail</span>inquiry@clarity-lab.com</div>
-        <div><span>Telefon</span>+43 660 3607188</div>
-        <div><span>Standort</span>Royerstraße 7, 2482 Münchendorf</div>
+        <div><span data-i18n="kontakt.email_label">E-Mail</span>inquiry@clarity-lab.com</div>
+        <div><span data-i18n="kontakt.phone_label">Telefon</span>+43 660 3607188</div>
+        <div><span data-i18n="kontakt.location_label">Standort</span>Royerstraße 7, 2482 Münchendorf</div>
       </div>
     </div>
   </div>
@@ -700,10 +732,10 @@
 
 <footer data-bg="#F6F7F4">
   <div class="wrap footer-inner">
-    <span>© 2026 Clarity Lab. Alle Rechte vorbehalten.</span>
+    <span data-i18n="footer.copyright">© 2026 Clarity Lab. Alle Rechte vorbehalten.</span>
     <div class="footer-links">
-      <a href="#">Impressum</a>
-      <a href="#">Datenschutz</a>
+      <a href="#" data-i18n="footer.impressum">Impressum</a>
+      <a href="#" data-i18n="footer.datenschutz">Datenschutz</a>
     </div>
   </div>
 </footer>
@@ -838,6 +870,7 @@
     countEls.forEach(runCount);
   }
 </script>
+<script src="i18n.js"></script>
 <script src="chatbot.js" defer></script>
 
 </body>
