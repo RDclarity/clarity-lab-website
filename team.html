@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team — Clarity Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #F6F7F4;
+    --paper-dim: #EEF0EC;
+    --ink: #15191C;
+    --slate: #5B6570;
+    --slate-light: #8B949C;
+    --line: #D9DED9;
+    --accent: #2456E5;
+    --accent-dim: #E6EBFB;
+    --accent-ink: #16337E;
+    --radius: 2px;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background: var(--paper);
+    color: var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .display{ font-family:'Space Grotesk', sans-serif; }
+  .mono{ font-family:'IBM Plex Mono', monospace; letter-spacing:0.06em; }
+
+  a{ color:inherit; text-decoration:none; }
+  img{ max-width:100%; display:block; }
+
+  ::selection{ background: var(--accent); color:#fff; }
+
+  :focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .wrap{
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  @media (max-width: 640px){
+    .wrap{ padding: 0 22px; }
+  }
+
+  /* ---------- AMBIENT ARROW FLOW ---------- */
+  .bg-arrows{
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.22;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='80'%3E%3Cpath d='M20 30 L30 42 L40 30' stroke='%235B6570' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 60px 80px;
+    animation: arrowFlow 4.5s linear infinite;
+  }
+  @keyframes arrowFlow{
+    from{ background-position: 0 0; }
+    to{ background-position: 0 80px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .bg-arrows{ animation: none; }
+  }
+
+  /* ---------- PROGRESS ---------- */
+  #progress{
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    width: 0%;
+    background: var(--accent);
+    z-index: 100;
+    transition: width .08s linear;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(246,247,244,0.88);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 20px 0;
+    transition: padding .3s cubic-bezier(.2,.7,.2,1);
+  }
+  header.scrolled .nav{ padding: 13px 0; }
+  .brand{
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:1.1rem;
+    letter-spacing:-0.01em;
+  }
+  .brand .dot{ color: var(--accent); }
+  .nav-links{
+    display:flex;
+    gap:36px;
+    font-size:0.88rem;
+  }
+  .nav-links a{
+    color: var(--slate);
+    transition: color .25s ease;
+    position:relative;
+    padding-bottom: 2px;
+  }
+  .nav-links a::after{
+    content:'';
+    position:absolute;
+    left:0; bottom:0;
+    width:100%;
+    height:1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform .3s cubic-bezier(.2,.7,.2,1);
+  }
+  .nav-links a:hover{ color: var(--ink); }
+  .nav-links a:hover::after{ transform: scaleX(1); transform-origin: left; }
+  .nav-links a.current{ color: var(--ink); }
+  .nav-links a.current::after{ transform: scaleX(1); transform-origin: left; }
+  .nav-cta{
+    font-size: 0.82rem;
+    padding: 10px 18px;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: var(--radius);
+    transition: background .2s ease;
+  }
+  .nav-cta:hover{ background: var(--accent); }
+  @media (max-width: 780px){
+    .nav-links{ display:none; }
+  }
+
+  /* ---------- HERO (compact, subpage) ---------- */
+  .hero{
+    padding: 88px 0 72px;
+    position:relative;
+  }
+  .hero-item{
+    filter: blur(7px);
+    opacity: 0;
+    transform: translateY(10px);
+    animation: focusIn .95s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+  .hero-item:nth-child(1){ animation-delay: .05s; }
+  .hero-item:nth-child(2){ animation-delay: .18s; }
+  .hero-item:nth-child(3){ animation-delay: .34s; }
+  .eyebrow{
+    font-size: 0.76rem;
+    color: var(--accent-ink);
+    background: var(--accent-dim);
+    display:inline-block;
+    padding: 6px 12px;
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+  }
+  .hero h1{
+    font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    max-width: 18ch;
+  }
+  @keyframes focusIn{
+    to{ filter: blur(0); opacity:1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero-item{ animation: none; filter:none; opacity:1; transform:none; }
+  }
+  .hero-sub{
+    margin-top: 22px;
+    max-width: 52ch;
+    font-size: 1.06rem;
+    color: var(--slate);
+  }
+
+  /* ---------- SECTION HEADERS ---------- */
+  section{ padding: 0 0 96px; }
+  .section-label{
+    font-size: 0.76rem;
+    color: var(--slate);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .reveal{
+    opacity:0;
+    transform: translateY(18px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .reveal.in{ opacity:1; transform:none; }
+
+  .reveal[data-stagger]{ opacity:1; transform:none; }
+  .reveal[data-stagger] > *{
+    opacity:0;
+    transform: translateY(16px);
+    transition: opacity .6s cubic-bezier(.2,.7,.2,1), transform .6s cubic-bezier(.2,.7,.2,1);
+  }
+  .reveal[data-stagger].in > *{ opacity:1; transform:none; }
+
+  /* ---------- TEAM GRID ---------- */
+  .team-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  @media (max-width: 820px){
+    .team-grid{ grid-template-columns: 1fr; }
+  }
+  .team-card{
+    background: var(--paper);
+    padding: 38px 32px 42px;
+    transition: background .3s ease, transform .3s cubic-bezier(.2,.7,.2,1);
+  }
+  .team-card:hover{
+    background: var(--paper-dim);
+    transform: translateY(-4px);
+  }
+  .avatar{
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--accent-dim);
+    color: var(--accent-ink);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 22px;
+  }
+  .team-card h3{
+    font-family:'Space Grotesk', sans-serif;
+    font-size: 1.2rem;
+    font-weight:600;
+    margin-bottom: 10px;
+  }
+  .team-card .role{
+    display:block;
+    font-size: 0.76rem;
+    color: var(--slate-light);
+    text-transform: uppercase;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{ padding: 44px 0; border-top: 1px solid var(--line); }
+  .footer-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap: 16px;
+    font-size: 0.8rem;
+    color: var(--slate);
+  }
+  .footer-links{ display:flex; gap: 22px; }
+</style>
+</head>
+<body>
+
+<div class="bg-arrows" aria-hidden="true"></div>
+<div id="progress" aria-hidden="true"></div>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="brand">Clarity<span class="dot">·</span>Lab</a>
+    <nav class="nav-links">
+      <a href="index.html#methode">Methode</a>
+      <a href="index.html#leistungen">Leistungen</a>
+      <a href="index.html#ergebnisse">Ergebnisse</a>
+      <a href="index.html#ueber">Über uns</a>
+      <a href="team.html" class="current">Team</a>
+    </nav>
+    <a href="index.html#kontakt" class="nav-cta">Erstgespräch</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow mono hero-item">TEAM — CLARITY LAB</span>
+    <h1 class="display hero-item">Die Menschen hinter der Methode.</h1>
+    <p class="hero-sub hero-item">Drei Perspektiven, ein Anspruch: Prozesse und Systeme so gestalten, dass sie im Alltag tatsächlich tragen.</p>
+  </div>
+</section>
+
+<section id="team">
+  <div class="wrap">
+    <div class="team-grid reveal" data-stagger>
+      <div class="team-card">
+        <div class="avatar mono">RD</div>
+        <h3 class="display">Richard Dobrohruschka</h3>
+        <span class="role mono">Rolle folgt</span>
+      </div>
+      <div class="team-card">
+        <div class="avatar mono">MK</div>
+        <h3 class="display">Marko Katalan</h3>
+        <span class="role mono">Rolle folgt</span>
+      </div>
+      <div class="team-card">
+        <div class="avatar mono">MS</div>
+        <h3 class="display">Mihai Suta</h3>
+        <span class="role mono">Rolle folgt</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span>© 2026 Clarity Lab. Alle Rechte vorbehalten.</span>
+    <div class="footer-links">
+      <a href="#">Impressum</a>
+      <a href="#">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const progressBar = document.getElementById('progress');
+  const headerEl = document.querySelector('header');
+
+  function onScroll(){
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? scrollTop / docHeight : 0;
+    progressBar.style.width = (pct * 100) + '%';
+    headerEl.classList.toggle('scrolled', scrollTop > 40);
+  }
+  document.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  const revealEls = document.querySelectorAll('.reveal');
+  function activate(el){
+    if(el.hasAttribute('data-stagger')){
+      Array.from(el.children).forEach((child, i) => {
+        child.style.transitionDelay = reduceMotion ? '0s' : (i * 0.09) + 's';
+      });
+    }
+    el.classList.add('in');
+  }
+  if('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          activate(entry.target);
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(activate);
+  }
+</script>
+
+</body>
+</html>
