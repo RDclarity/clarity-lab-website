@@ -107,12 +107,39 @@
   /* ---------- DASHBOARD ---------- */
   #dashboardView{ display:none; }
   .panel-block{ margin-bottom:56px; }
+  .panel-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:16px;
+    margin-bottom:6px;
+  }
   .panel-block h2{
     font-size:1.15rem;
     font-weight:600;
-    margin-bottom:6px;
   }
+  .export-btn{
+    background:none;
+    border:1px solid var(--line);
+    color: var(--accent-ink);
+    padding:7px 14px;
+    border-radius: var(--radius);
+    font-family:inherit;
+    font-size:0.8rem;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .export-btn:hover{ border-color: var(--accent); background: var(--accent-dim); }
   .panel-block .count{ color: var(--slate); font-size:0.85rem; margin-bottom:20px; }
+  .summary-cards{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom:20px; }
+  .summary-card{
+    background: var(--paper-dim);
+    padding:14px 18px;
+    border-radius: var(--radius);
+    min-width:140px;
+  }
+  .summary-card .num{ font-family:'Space Grotesk', sans-serif; font-size:1.4rem; font-weight:600; }
+  .summary-card .lbl{ font-size:0.76rem; color: var(--slate); margin-top:2px; }
   table{ width:100%; border-collapse: collapse; font-size:0.88rem; }
   thead th{
     text-align:left;
@@ -162,7 +189,10 @@
 
   <div id="dashboardView">
     <div class="panel-block">
-      <h2 class="display">Kontaktanfragen</h2>
+      <div class="panel-head">
+        <h2 class="display">Kontaktanfragen</h2>
+        <button class="export-btn" type="button" id="exportContactsBtn">Als Excel exportieren</button>
+      </div>
       <div class="count" id="contactsCount"></div>
       <table>
         <thead>
@@ -175,7 +205,10 @@
     </div>
 
     <div class="panel-block">
-      <h2 class="display">Newsletter-Abonnenten</h2>
+      <div class="panel-head">
+        <h2 class="display">Newsletter-Abonnenten</h2>
+        <button class="export-btn" type="button" id="exportNewsletterBtn">Als Excel exportieren</button>
+      </div>
       <div class="count" id="newsletterCount"></div>
       <table>
         <thead>
@@ -183,6 +216,19 @@
         </thead>
         <tbody id="newsletterBody">
           <tr class="loading-row"><td colspan="3">Lade…</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel-block">
+      <h2 class="display">Website-Besucher</h2>
+      <div class="summary-cards" id="analyticsSummary"></div>
+      <table>
+        <thead>
+          <tr><th>Seite</th><th>Herkunft</th><th>Gerät</th><th>Verweildauer</th><th>Datum</th></tr>
+        </thead>
+        <tbody id="analyticsBody">
+          <tr class="loading-row"><td colspan="5">Lade…</td></tr>
         </tbody>
       </table>
     </div>
@@ -199,19 +245,8 @@
   var configNote = document.getElementById('configNote');
   var logoutBtn = document.getElementById('logoutBtn');
 
-  var configured = window.CLARITY_SUPABASE
-    && window.CLARITY_SUPABASE.url
-    && window.CLARITY_SUPABASE.url.indexOf('YOUR_SUPABASE') === -1
-    && window.supabase;
-
-  if(!configured){
-    configNote.classList.add('show');
-    loginForm.querySelector('button').disabled = true;
-  }
-
-  var client = configured
-    ? window.supabase.createClient(window.CLARITY_SUPABASE.url, window.CLARITY_SUPABASE.anonKey)
-    : null;
+  var client = null;
+  loginForm.querySelector('button').disabled = true;
 
   function fmtDate(iso){
     try{
@@ -225,7 +260,57 @@
     return div.innerHTML;
   }
 
+  function fmtDuration(sec){
+    if(sec == null) return '—';
+    var m = Math.floor(sec / 60), s = sec % 60;
+    return m > 0 ? (m + ' min ' + s + 's') : (s + 's');
+  }
+
+  var contactsData = [];
+  var newsletterData = [];
+
+  function csvEscape(val){
+    var str = val == null ? '' : String(val);
+    if(/[",\n;]/.test(str)) return '"' + str.replace(/"/g, '""') + '"';
+    return str;
+  }
+
+  function downloadCSV(filename, rows, columns){
+    var lines = [columns.map(function(c){ return csvEscape(c.label); }).join(';')];
+    rows.forEach(function(row){
+      lines.push(columns.map(function(c){ return csvEscape(c.get(row)); }).join(';'));
+    });
+    var blob = new Blob(['﻿' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8;' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  document.getElementById('exportContactsBtn').addEventListener('click', function(){
+    downloadCSV('kontaktanfragen.csv', contactsData, [
+      { label: 'Name', get: function(r){ return r.name; } },
+      { label: 'E-Mail', get: function(r){ return r.email; } },
+      { label: 'Telefon', get: function(r){ return r.phone; } },
+      { label: 'Newsletter', get: function(r){ return r.newsletter_opt_in ? 'Ja' : 'Nein'; } },
+      { label: 'Datum', get: function(r){ return fmtDate(r.created_at); } }
+    ]);
+  });
+
+  document.getElementById('exportNewsletterBtn').addEventListener('click', function(){
+    downloadCSV('newsletter-abonnenten.csv', newsletterData, [
+      { label: 'Name', get: function(r){ return r.name; } },
+      { label: 'E-Mail', get: function(r){ return r.email; } },
+      { label: 'Datum', get: function(r){ return fmtDate(r.created_at); } }
+    ]);
+  });
+
   function renderContacts(rows){
+    contactsData = rows;
     var body = document.getElementById('contactsBody');
     document.getElementById('contactsCount').textContent = rows.length + ' Einträge';
     if(rows.length === 0){
@@ -244,6 +329,7 @@
   }
 
   function renderNewsletter(rows){
+    newsletterData = rows;
     var body = document.getElementById('newsletterBody');
     document.getElementById('newsletterCount').textContent = rows.length + ' Abonnenten';
     if(rows.length === 0){
@@ -255,6 +341,36 @@
         + '<td>' + escapeHtml(r.name || '—') + '</td>'
         + '<td>' + escapeHtml(r.email) + '</td>'
         + '<td>' + fmtDate(r.created_at) + '</td>'
+        + '</tr>';
+    }).join('');
+  }
+
+  function renderAnalytics(visits, durationsBySession){
+    var summaryEl = document.getElementById('analyticsSummary');
+    var body = document.getElementById('analyticsBody');
+
+    var deviceCounts = {};
+    visits.forEach(function(v){
+      deviceCounts[v.device_type] = (deviceCounts[v.device_type] || 0) + 1;
+    });
+    var summaryHtml = '<div class="summary-card"><div class="num">' + visits.length + '</div><div class="lbl">Seitenaufrufe</div></div>';
+    Object.keys(deviceCounts).sort().forEach(function(device){
+      summaryHtml += '<div class="summary-card"><div class="num">' + deviceCounts[device] + '</div><div class="lbl">' + escapeHtml(device) + '</div></div>';
+    });
+    summaryEl.innerHTML = summaryHtml;
+
+    if(visits.length === 0){
+      body.innerHTML = '<tr class="empty-row"><td colspan="5">Noch keine Besuche.</td></tr>';
+      return;
+    }
+    body.innerHTML = visits.map(function(v){
+      var duration = durationsBySession[v.session_id];
+      return '<tr>'
+        + '<td>' + escapeHtml(v.page) + '</td>'
+        + '<td>' + escapeHtml(v.referrer || 'Direktzugriff') + '</td>'
+        + '<td>' + escapeHtml(v.device_type) + '</td>'
+        + '<td>' + fmtDuration(duration) + '</td>'
+        + '<td>' + fmtDate(v.created_at) + '</td>'
         + '</tr>';
     }).join('');
   }
@@ -277,6 +393,24 @@
         console.error(err);
         document.getElementById('newsletterBody').innerHTML = '<tr class="empty-row"><td colspan="3">Fehler beim Laden.</td></tr>';
       });
+
+    Promise.all([
+      client.from('page_visits').select('*').order('created_at', { ascending:false }).limit(300),
+      client.from('page_visit_durations').select('session_id, duration_seconds')
+    ]).then(function(results){
+      var visitsRes = results[0], durationsRes = results[1];
+      if(visitsRes.error) throw visitsRes.error;
+      if(durationsRes.error) throw durationsRes.error;
+      var durationsBySession = {};
+      (durationsRes.data || []).forEach(function(d){
+        var current = durationsBySession[d.session_id] || 0;
+        durationsBySession[d.session_id] = Math.max(current, d.duration_seconds);
+      });
+      renderAnalytics(visitsRes.data || [], durationsBySession);
+    }).catch(function(err){
+      console.error(err);
+      document.getElementById('analyticsBody').innerHTML = '<tr class="empty-row"><td colspan="5">Fehler beim Laden.</td></tr>';
+    });
   }
 
   function showDashboard(){
@@ -292,33 +426,46 @@
     logoutBtn.style.display = 'none';
   }
 
-  if(client){
-    client.auth.getSession().then(function(res){
-      if(res.data && res.data.session){ showDashboard(); }
-    });
+  if(window.claritySupabaseReady){
+    window.claritySupabaseReady(function(resolvedClient){
+      client = resolvedClient;
 
-    loginForm.addEventListener('submit', function(e){
-      e.preventDefault();
-      var email = document.getElementById('admin-email').value.trim();
-      var password = document.getElementById('admin-password').value;
-      var btn = loginForm.querySelector('button');
-      btn.disabled = true;
-      loginNote.classList.remove('show');
+      if(!client){
+        configNote.classList.add('show');
+        return;
+      }
 
-      client.auth.signInWithPassword({ email: email, password: password }).then(function(res){
-        if(res.error) throw res.error;
-        showDashboard();
-      }).catch(function(err){
-        loginNote.textContent = 'Anmeldung fehlgeschlagen. E-Mail oder Passwort falsch.';
-        loginNote.classList.add('show');
-      }).finally(function(){
-        btn.disabled = false;
+      loginForm.querySelector('button').disabled = false;
+
+      client.auth.getSession().then(function(res){
+        if(res.data && res.data.session){ showDashboard(); }
+      });
+
+      loginForm.addEventListener('submit', function(e){
+        e.preventDefault();
+        var email = document.getElementById('admin-email').value.trim();
+        var password = document.getElementById('admin-password').value;
+        var btn = loginForm.querySelector('button');
+        btn.disabled = true;
+        loginNote.classList.remove('show');
+
+        client.auth.signInWithPassword({ email: email, password: password }).then(function(res){
+          if(res.error) throw res.error;
+          showDashboard();
+        }).catch(function(err){
+          loginNote.textContent = 'Anmeldung fehlgeschlagen. E-Mail oder Passwort falsch.';
+          loginNote.classList.add('show');
+        }).finally(function(){
+          btn.disabled = false;
+        });
+      });
+
+      logoutBtn.addEventListener('click', function(){
+        client.auth.signOut().then(function(){ showLogin(); });
       });
     });
-
-    logoutBtn.addEventListener('click', function(){
-      client.auth.signOut().then(function(){ showLogin(); });
-    });
+  } else {
+    configNote.classList.add('show');
   }
 </script>
 

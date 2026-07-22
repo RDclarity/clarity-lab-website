@@ -18,15 +18,6 @@
     noteEl.classList.toggle('error', !!isError);
   }
 
-  var configured = window.CLARITY_SUPABASE
-    && window.CLARITY_SUPABASE.url
-    && window.CLARITY_SUPABASE.url.indexOf('YOUR_SUPABASE') === -1
-    && window.supabase;
-
-  var client = configured
-    ? window.supabase.createClient(window.CLARITY_SUPABASE.url, window.CLARITY_SUPABASE.anonKey)
-    : null;
-
   form.addEventListener('submit', function(e){
     e.preventDefault();
 
@@ -37,7 +28,7 @@
 
     if(!name || !email) return;
 
-    if(!client){
+    if(!window.claritySupabaseReady){
       console.warn('Supabase is not configured yet — see supabase-config.js');
       showNote(currentStrings().form_error || 'Configuration missing.', true);
       return;
@@ -45,29 +36,37 @@
 
     submitBtn.disabled = true;
 
-    client.from('contacts').insert({
-      name: name,
-      phone: phone,
-      email: email,
-      newsletter_opt_in: newsletter
-    }).then(function(res){
-      if(res.error) throw res.error;
-      if(newsletter){
-        return client.from('newsletter_subscribers')
-          .insert({ name: name, email: email })
-          .then(function(nlRes){
-            // 23505 = unique_violation: already subscribed with this email — not an error for the user
-            if(nlRes.error && nlRes.error.code !== '23505') throw nlRes.error;
-          });
+    window.claritySupabaseReady(function(client){
+      if(!client){
+        showNote(currentStrings().form_error || 'Configuration missing.', true);
+        submitBtn.disabled = false;
+        return;
       }
-    }).then(function(){
-      form.reset();
-      showNote(currentStrings().form_success || 'Thank you.', false);
-    }).catch(function(err){
-      console.error(err);
-      showNote(currentStrings().form_error || 'Something went wrong.', true);
-    }).finally(function(){
-      submitBtn.disabled = false;
+
+      client.from('contacts').insert({
+        name: name,
+        phone: phone,
+        email: email,
+        newsletter_opt_in: newsletter
+      }).then(function(res){
+        if(res.error) throw res.error;
+        if(newsletter){
+          return client.from('newsletter_subscribers')
+            .insert({ name: name, email: email })
+            .then(function(nlRes){
+              // 23505 = unique_violation: already subscribed with this email — not an error for the user
+              if(nlRes.error && nlRes.error.code !== '23505') throw nlRes.error;
+            });
+        }
+      }).then(function(){
+        form.reset();
+        showNote(currentStrings().form_success || 'Thank you.', false);
+      }).catch(function(err){
+        console.error(err);
+        showNote(currentStrings().form_error || 'Something went wrong.', true);
+      }).finally(function(){
+        submitBtn.disabled = false;
+      });
     });
   });
 })();
