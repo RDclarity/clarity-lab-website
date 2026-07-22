@@ -3,7 +3,7 @@
     de: {
       meta: { title: 'Clarity Lab — Prozess- und Systemberatung' },
       common: { day_suffix: ' Tage' },
-      nav: { methode: 'Methode', leistungen: 'Leistungen', ergebnisse: 'Ergebnisse', ueber: 'Über uns', team: 'Team', cta: 'Erstgespräch' },
+      nav: { methode: 'Methode', leistungen: 'Leistungen', ergebnisse: 'Ergebnisse', ueber: 'Über uns', team: 'Team', referenzen: 'Referenzen', cta: 'Erstgespräch' },
       hero: {
         eyebrow: 'CLARITY LAB — PROZESS- UND SYSTEMBERATUNG',
         h1_html: 'Klarheit ist keine Frage des Talents. Sie ist ein <em>Prozess</em>.',
@@ -90,12 +90,33 @@
         h1: 'Die Menschen hinter der Methode.',
         sub: 'Drei Perspektiven, ein Anspruch: Prozesse und Systeme so gestalten, dass sie im Alltag tatsächlich tragen.',
         role_pending: 'Rolle folgt'
+      },
+      ref_page: {
+        meta_title: 'Referenz — Clarity Lab',
+        eyebrow: 'REFERENZ — CLARITY LAB',
+        h1: 'Ein Handwerksbetrieb, der endlich mit seinem Wachstum Schritt hielt.',
+        sub: 'Metallbau Hofer war voll ausgelastet — und kam trotzdem nicht vom Fleck. 18 Monate später lag der Jahresumsatz 50 % höher.',
+        s1_label: '01 — AUSGANGSLAGE',
+        s1_h: 'Volle Auftragsbücher, stehender Umsatz.',
+        s1_p: 'Metallbau Hofer, ein Handwerksbetrieb für Stahl- und Metallbau in Niederösterreich, hatte über Jahre einen stabilen Kundenstamm aufgebaut — und trotzdem stagnierte der Umsatz bei rund 500.000 € im Jahr. Aufträge kamen herein, blieben aber in informellen Abstimmungsschleifen hängen. Wer wofür zuständig war, wusste oft nur der Chef selbst.',
+        s2_label: '02 — VORGEHEN',
+        s2_h: 'Diagnose vor Lösung — wie überall bei uns.',
+        s2_p: 'Wir kartierten den kompletten Auftragsprozess vom Angebot bis zur Montage. Ergebnis: Drei von fünf Verzögerungen entstanden nicht in der Werkstatt, sondern in der Kommunikation davor. Aus der Diagnose entstand ein neues Rollenmodell mit klaren Verantwortlichkeiten für Angebotserstellung, Materialdisposition und Terminplanung — begleitet, bis der neue Ablauf im Alltag trug.',
+        s3_label: '03 — ERGEBNIS',
+        s3_h: 'Was am Ende zählt.',
+        stat1: 'Jahresumsatz in 18 Monaten (500.000 € → 750.000 €)',
+        stat2: 'Durchlaufzeit von Anfrage bis Angebot',
+        stat3: 'Monate bis zur ersten spürbaren Entlastung im Tagesgeschäft',
+        quote: '„Wir wissen heute, wer wofür verantwortlich ist — und die Aufträge laufen, ohne dass ich jeden Handgriff selbst koordinieren muss.“',
+        quote_cite: 'Geschäftsführung, Metallbau Hofer',
+        cta_h: 'Ähnliche Herausforderung?',
+        cta_btn: 'Erstgespräch vereinbaren'
       }
     },
     en: {
       meta: { title: 'Clarity Lab — Process & Systems Consulting' },
       common: { day_suffix: ' days' },
-      nav: { methode: 'Method', leistungen: 'Services', ergebnisse: 'Results', ueber: 'About', team: 'Team', cta: 'Consultation' },
+      nav: { methode: 'Method', leistungen: 'Services', ergebnisse: 'Results', ueber: 'About', team: 'Team', referenzen: 'Case Study', cta: 'Consultation' },
       hero: {
         eyebrow: 'CLARITY LAB — PROCESS & SYSTEMS CONSULTING',
         h1_html: "Clarity isn't a matter of talent. It's a <em>process</em>.",
@@ -182,6 +203,27 @@
         h1: 'The people behind the method.',
         sub: 'Three perspectives, one standard: designing processes and systems that actually hold up in daily practice.',
         role_pending: 'Role to be announced'
+      },
+      ref_page: {
+        meta_title: 'Case Study — Clarity Lab',
+        eyebrow: 'CASE STUDY — CLARITY LAB',
+        h1: 'A trade business that finally kept pace with its own growth.',
+        sub: "Metallbau Hofer had a full order book — and still wasn't moving forward. 18 months later, annual revenue was 50% higher.",
+        s1_label: '01 — STARTING POINT',
+        s1_h: 'Full order books, flat revenue.',
+        s1_p: "Metallbau Hofer, a steel and metal fabrication business in Lower Austria, had built a stable customer base over the years — yet revenue stalled at around €500,000 a year. Orders came in, but got stuck in informal back-and-forth. Who was responsible for what was often only clear to the owner himself.",
+        s2_label: '02 — APPROACH',
+        s2_h: 'Diagnosis before solution — as always.',
+        s2_p: "We mapped the entire order process from quote to installation. Result: three out of five delays weren't happening in the workshop, but in the communication beforehand. The diagnosis led to a new role model with clear responsibilities for quoting, material planning, and scheduling — supported until the new workflow held up in daily practice.",
+        s3_label: '03 — RESULT',
+        s3_h: 'What matters in the end.',
+        stat1: 'Annual revenue in 18 months (€500,000 → €750,000)',
+        stat2: 'Lead time from inquiry to quote',
+        stat3: 'months to the first noticeable relief in daily operations',
+        quote: '"Today we know who\'s responsible for what — and orders move forward without me coordinating every single step myself."',
+        quote_cite: 'Management, Metallbau Hofer',
+        cta_h: 'Facing a similar challenge?',
+        cta_btn: 'Schedule a consultation'
       }
     }
   };
