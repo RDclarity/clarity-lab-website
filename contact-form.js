@@ -54,7 +54,11 @@
       if(res.error) throw res.error;
       if(newsletter){
         return client.from('newsletter_subscribers')
-          .upsert({ name: name, email: email }, { onConflict: 'email' });
+          .insert({ name: name, email: email })
+          .then(function(nlRes){
+            // 23505 = unique_violation: already subscribed with this email — not an error for the user
+            if(nlRes.error && nlRes.error.code !== '23505') throw nlRes.error;
+          });
       }
     }).then(function(){
       form.reset();
