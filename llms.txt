@@ -1,17 +1,17 @@
 # Clarity Lab
 
-> Clarity Lab ist eine Prozess- und Systemberatung aus Österreich (Wien / Münchendorf). Wir analysieren, wie Unternehmen wirklich arbeiten, und bauen Prozesse und Systeme, die diese Arbeit tragen statt sie zu bremsen. Methode: Diagnose vor Neugestaltung vor Umsetzung.
+> Clarity Lab baut mit inhabergeführten Unternehmen (v.a. Handwerksbetriebe, produzierende Betriebe) Systeme für planbare Neukunden, bessere Abschlussquoten, klare Prozesse und weniger Abhängigkeit vom Inhaber. Ablauf: Analyse, Aufbau, Umsetzung.
 
 ## Seiten
 
-- [Startseite](https://rdclarity.github.io/clarity-lab-website/index.html): Methode, Leistungen (Prozessanalyse, Systemarchitektur, Organisationsdesign, Change-Begleitung, Kennzahlen & Steuerung, Interim-Mandate), Ergebnisse, Über uns, Kontakt
-- [Team](https://rdclarity.github.io/clarity-lab-website/team.html): Richard Dobrohruschka, Marko Katalan, Mihai Suta
-- [Referenz](https://rdclarity.github.io/clarity-lab-website/referenzen.html): Fallbeispiel Metallbau Hofer — Jahresumsatz von 500.000 € auf 750.000 € in 18 Monaten gesteigert
+- [Startseite](https://rdclarity.github.io/clarity-lab-website/index.html): Leistungen (Mehr Neukunden, Mehr Abschlüsse, CRM & Automatisierung, Prozesse, Unternehmerfreiheit), Warum Clarity Lab, Ablauf, FAQ, kostenlose Unternehmensanalyse
+- [Team](https://rdclarity.github.io/clarity-lab-website/team.html): Richard Dobrohruschka (Marketing, Vertrieb, Unternehmensentwicklung, Prozessaufbau), Marko Katalan (Strategie, Organisation, Unternehmensentwicklung, Wachstum)
 - [Datenschutz](https://rdclarity.github.io/clarity-lab-website/datenschutz.html): Datenschutzerklärung
+- [Impressum](https://rdclarity.github.io/clarity-lab-website/impressum.html): Impressum
 
 ## Kontakt
 
 - E-Mail: inquiry@clarity-lab.com
 - Telefon: +43 660 3607188
 - Adresse: Royerstraße 7, 2482 Münchendorf, Österreich
-- Termin buchen: über den "Termin buchen"-Button auf der Startseite
+- Kostenlose Unternehmensanalyse: Formular im Kontakt-Bereich der Startseite

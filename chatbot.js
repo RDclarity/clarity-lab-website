@@ -31,76 +31,76 @@
       {
         label: 'Über Clarity Lab',
         keywords: ['was ist', 'über euch', 'über clarity', 'firma', 'unternehmen', 'wer seid ihr'],
-        answer: 'Clarity Lab ist eine Prozess- und Systemberatung aus Österreich. Wir bringen Ordnung in Komplexität — mit der Präzision eines Labors und dem Pragmatismus der Praxis. Unsere Grundsätze: Beobachten vor Bewerten, System vor Symptom, mit dem Team statt über es, Wirkung vor Bericht.'
+        answer: 'Clarity Lab baut mit inhabergeführten Betrieben Systeme für planbare Neukunden, bessere Abschlüsse und klare Prozesse — damit dein Unternehmen nicht dauerhaft von dir abhängig ist. Praxis statt Theorie: Wir setzen dieselben Systeme auch in unseren eigenen Unternehmen ein.'
       },
       {
         label: 'Unsere Leistungen',
         keywords: ['leistung', 'angebot', 'service', 'was bietet'],
-        answer: 'Wir arbeiten an: <ul><li>Prozessanalyse — Ist-Aufnahme entlang der Wertschöpfungskette</li><li>Systemarchitektur — Software, die sich am Prozess orientiert</li><li>Organisationsdesign — klare Rollen &amp; Entscheidungswege</li><li>Change-Begleitung — Einführung gemeinsam mit dem Team</li><li>Kennzahlen &amp; Steuerung — Messgrößen, die zählen</li><li>Interim-Mandate — temporäre operative Führung</li></ul>'
+        answer: 'Fünf Bereiche: <ul><li>Mehr Neukunden — Meta/Google Ads, Webseiten, Leadgenerierung</li><li>Mehr Abschlüsse — Vertriebsprozess, Telefonleitfäden, Einwandbehandlung</li><li>CRM &amp; Automatisierung — Aircall, CRM, KI, Dashboards</li><li>Prozesse — Checklisten, Standards, Verantwortlichkeiten</li><li>Unternehmerfreiheit — Delegation, Kennzahlen, Führung</li></ul>'
       },
       {
-        label: 'Unsere Methode',
-        keywords: ['methode', 'prozess ab', 'ablauf', 'wie arbeitet', 'vorgehen'],
-        answer: 'Drei Phasen, kein Blindflug:<br>1. <strong>Diagnose</strong> — Abläufe, Schnittstellen und Engpässe kartieren.<br>2. <strong>Neugestaltung</strong> — schlankere Prozesse, klare Verantwortlichkeiten.<br>3. <strong>Umsetzung</strong> — Begleitung bis die neuen Abläufe im Alltag tragen.'
+        label: 'Ablauf der Zusammenarbeit',
+        keywords: ['methode', 'ablauf', 'wie arbeitet', 'vorgehen', 'zusammenarbeit'],
+        answer: 'Drei Schritte:<br>1. <strong>Analyse</strong> — wir schauen uns dein Unternehmen an.<br>2. <strong>Aufbau</strong> — wir bauen gemeinsam die fehlenden Systeme.<br>3. <strong>Umsetzung</strong> — Begleitung bis es messbar läuft.'
       },
       {
-        label: 'Ergebnisse',
-        keywords: ['ergebnis', 'erfolg', 'zahlen', 'statistik', 'referenz'],
-        answer: 'In Zahlen: <strong>40+</strong> begleitete Transformationen, <strong>90 Tage</strong> bis zur ersten messbaren Wirkung, durchschnittlich <strong>−34%</strong> Durchlaufzeit.'
+        label: 'Für welche Unternehmen?',
+        keywords: ['für welche', 'zielgruppe', 'passt das', 'unternehmensgröße'],
+        answer: 'Für inhabergeführte Betriebe, vor allem im Handwerk und in produzierenden Branchen — von Tischlereien über Installateure bis zu Bauunternehmen. Von Einzelunternehmern mit ersten Mitarbeitern bis zu Betrieben mit mehreren Dutzend Mitarbeitenden.'
       },
       {
         label: 'Unser Team',
         keywords: ['team', 'mitarbeiter', 'wer arbeitet'],
-        answer: 'Im Team: Richard Dobrohruschka, Marko Katalan und Mihai Suta. <a href="team.html">Mehr zum Team →</a>'
+        answer: 'Im Team: Richard Dobrohruschka und Marko Katalan, beide selbst Unternehmer. <a href="team.html">Mehr zum Team →</a>'
       },
       {
         label: 'Kontakt & Adresse',
         keywords: ['kontakt', 'email', 'e-mail', 'telefon', 'adresse', 'erreichen', 'standort'],
-        answer: 'E-Mail: inquiry@clarity-lab.com<br>Telefon: +43 660 3607188<br>Adresse: Royerstraße 7, 2482 Münchendorf<br><br>Am schnellsten geht’s mit einem direkten Termin — Button „Termin buchen“ unten.'
+        answer: 'E-Mail: inquiry@clarity-lab.com<br>Telefon: +43 660 3607188<br>Adresse: Royerstraße 7, 2482 Münchendorf<br><br>Am schnellsten geht’s über das Analyse-Formular unten auf der Startseite.'
       },
       {
         label: 'Termin vereinbaren',
         hideChip: true,
-        keywords: ['termin', 'buchen', 'meeting', 'gespräch', 'vereinbaren', 'erstgespräch'],
-        answer: 'Am einfachsten direkt hier buchen: <a href="' + BOOKING_URL + '" target="_blank" rel="noopener noreferrer">Termin-Kalender öffnen →</a>'
+        keywords: ['termin', 'buchen', 'meeting', 'gespräch', 'vereinbaren', 'erstgespräch', 'analyse'],
+        answer: 'Am schnellsten über das kurze Formular im Kontakt-Bereich — danach kannst du direkt einen Termin wählen: <a href="' + BOOKING_URL + '" target="_blank" rel="noopener noreferrer">Termin-Kalender öffnen →</a>'
       }
     ],
     en: [
       {
         label: 'About Clarity Lab',
         keywords: ['what is', 'about you', 'about clarity', 'company', 'who are you'],
-        answer: 'Clarity Lab is a process and systems consultancy from Austria. We bring order to complexity — with the precision of a lab and the pragmatism of practice. Our principles: observe before judging, system over symptom, with the team rather than over it, impact over reporting.'
+        answer: "Clarity Lab builds systems with owner-run businesses for predictable new customers, better close rates, and clear processes — so your business isn't permanently dependent on you. Practice, not theory: we use the same systems in our own businesses."
       },
       {
         label: 'Our Services',
         keywords: ['service', 'offer', 'what do you do'],
-        answer: 'We work on: <ul><li>Process Analysis — current-state assessment across the value chain</li><li>System Architecture — software that follows the process</li><li>Organizational Design — clear roles &amp; decision paths</li><li>Change Management — rollout together with the team</li><li>Metrics &amp; Governance — metrics that matter</li><li>Interim Management — temporary operational leadership</li></ul>'
+        answer: 'Five areas: <ul><li>More new customers — Meta/Google Ads, websites, lead generation</li><li>More closed deals — sales process, phone scripts, objection handling</li><li>CRM &amp; Automation — Aircall, CRM, AI, dashboards</li><li>Processes — checklists, standards, responsibilities</li><li>Owner freedom — delegation, metrics, leadership</li></ul>'
       },
       {
-        label: 'Our Method',
-        keywords: ['method', 'process work', 'how do you work', 'approach'],
-        answer: 'Three phases, no guesswork:<br>1. <strong>Diagnosis</strong> — mapping workflows, interfaces, and bottlenecks.<br>2. <strong>Redesign</strong> — leaner processes, clear responsibilities.<br>3. <strong>Implementation</strong> — support until the new workflows hold up day to day.'
+        label: 'How we work together',
+        keywords: ['method', 'process', 'how do you work', 'approach', 'collaboration'],
+        answer: 'Three steps:<br>1. <strong>Analysis</strong> — we look at your business.<br>2. <strong>Build</strong> — we build the missing systems together.<br>3. <strong>Implementation</strong> — support until it runs measurably.'
       },
       {
-        label: 'Results',
-        keywords: ['result', 'success', 'numbers', 'stats', 'reference'],
-        answer: 'In numbers: <strong>40+</strong> guided transformations, <strong>90 days</strong> to first measurable impact, an average <strong>−34%</strong> reduction in lead time.'
+        label: 'Who is this for?',
+        keywords: ['who is this for', 'company size', 'fit', 'suitable'],
+        answer: 'For owner-run businesses, especially in trades and manufacturing — from joineries to electricians to construction companies. From sole proprietors with their first employees to businesses with several dozen employees.'
       },
       {
         label: 'Our Team',
         keywords: ['team', 'staff', 'who works there'],
-        answer: 'On the team: Richard Dobrohruschka, Marko Katalan, and Mihai Suta. <a href="team.html">More about the team →</a>'
+        answer: 'On the team: Richard Dobrohruschka and Marko Katalan, both business owners themselves. <a href="team.html">More about the team →</a>'
       },
       {
         label: 'Contact & Address',
         keywords: ['contact', 'email', 'phone', 'address', 'reach you', 'location'],
-        answer: 'Email: inquiry@clarity-lab.com<br>Phone: +43 660 3607188<br>Address: Royerstraße 7, 2482 Münchendorf, Austria<br><br>Fastest way is a direct booking — use the "Book a meeting" button below.'
+        answer: 'Email: inquiry@clarity-lab.com<br>Phone: +43 660 3607188<br>Address: Royerstraße 7, 2482 Münchendorf, Austria<br><br>Fastest way is the short form in the contact section below.'
       },
       {
         label: 'Schedule an appointment',
         hideChip: true,
-        keywords: ['appointment', 'book', 'meeting', 'schedule', 'consultation'],
-        answer: 'Easiest way is to book directly here: <a href="' + BOOKING_URL + '" target="_blank" rel="noopener noreferrer">Open booking calendar →</a>'
+        keywords: ['appointment', 'book', 'meeting', 'schedule', 'consultation', 'analysis'],
+        answer: 'Fastest way is the short form in the contact section — afterwards you can pick a time directly: <a href="' + BOOKING_URL + '" target="_blank" rel="noopener noreferrer">Open booking calendar →</a>'
       }
     ]
   };

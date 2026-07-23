@@ -3,6 +3,7 @@
   if(!form) return;
 
   var noteEl = document.getElementById('formNote');
+  var followup = document.getElementById('bookingFollowup');
   var submitBtn = form.querySelector('button[type="submit"]');
 
   function currentStrings(){
@@ -21,7 +22,11 @@
   form.addEventListener('submit', function(e){
     e.preventDefault();
 
+    var company = form.company ? form.company.value.trim() : '';
     var name = form.name.value.trim();
+    var employeeCount = form.employee_count ? form.employee_count.value : '';
+    var annualRevenue = form.annual_revenue ? form.annual_revenue.value : '';
+    var biggestChallenge = form.biggest_challenge ? form.biggest_challenge.value.trim() : '';
     var phone = form.phone.value.trim();
     var email = form.email.value.trim();
     var newsletter = form.newsletter.checked;
@@ -47,7 +52,11 @@
         name: name,
         phone: phone,
         email: email,
-        newsletter_opt_in: newsletter
+        newsletter_opt_in: newsletter,
+        company: company,
+        employee_count: employeeCount,
+        annual_revenue: annualRevenue,
+        biggest_challenge: biggestChallenge
       }).then(function(res){
         if(res.error) throw res.error;
         if(newsletter){
@@ -61,6 +70,7 @@
       }).then(function(){
         form.reset();
         showNote(currentStrings().form_success || 'Thank you.', false);
+        if(followup) followup.classList.add('show');
         if(window.clarityLogConversion) window.clarityLogConversion('form_submit');
       }).catch(function(err){
         console.error(err);

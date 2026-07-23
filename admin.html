@@ -200,10 +200,10 @@
       <div class="count" id="contactsCount"></div>
       <table>
         <thead>
-          <tr><th>Name</th><th>E-Mail</th><th>Telefon</th><th>Newsletter</th><th>Datum</th></tr>
+          <tr><th>Unternehmen</th><th>Name</th><th>Mitarbeiter</th><th>Umsatz</th><th>Herausforderung</th><th>Telefon</th><th>E-Mail</th><th>Newsletter</th><th>Datum</th></tr>
         </thead>
         <tbody id="contactsBody">
-          <tr class="loading-row"><td colspan="5">Lade…</td></tr>
+          <tr class="loading-row"><td colspan="9">Lade…</td></tr>
         </tbody>
       </table>
     </div>
@@ -299,9 +299,13 @@
 
   document.getElementById('exportContactsBtn').addEventListener('click', function(){
     downloadCSV('kontaktanfragen.csv', contactsData, [
+      { label: 'Unternehmen', get: function(r){ return r.company; } },
       { label: 'Name', get: function(r){ return r.name; } },
-      { label: 'E-Mail', get: function(r){ return r.email; } },
+      { label: 'Mitarbeiterzahl', get: function(r){ return r.employee_count; } },
+      { label: 'Jahresumsatz', get: function(r){ return r.annual_revenue; } },
+      { label: 'Größte Herausforderung', get: function(r){ return r.biggest_challenge; } },
       { label: 'Telefon', get: function(r){ return r.phone; } },
+      { label: 'E-Mail', get: function(r){ return r.email; } },
       { label: 'Newsletter', get: function(r){ return r.newsletter_opt_in ? 'Ja' : 'Nein'; } },
       { label: 'Datum', get: function(r){ return fmtDate(r.created_at); } }
     ]);
@@ -320,14 +324,18 @@
     var body = document.getElementById('contactsBody');
     document.getElementById('contactsCount').textContent = rows.length + ' Einträge';
     if(rows.length === 0){
-      body.innerHTML = '<tr class="empty-row"><td colspan="5">Noch keine Anfragen.</td></tr>';
+      body.innerHTML = '<tr class="empty-row"><td colspan="9">Noch keine Anfragen.</td></tr>';
       return;
     }
     body.innerHTML = rows.map(function(r){
       return '<tr>'
+        + '<td>' + escapeHtml(r.company || '—') + '</td>'
         + '<td>' + escapeHtml(r.name) + '</td>'
-        + '<td>' + escapeHtml(r.email) + '</td>'
+        + '<td>' + escapeHtml(r.employee_count || '—') + '</td>'
+        + '<td>' + escapeHtml(r.annual_revenue || '—') + '</td>'
+        + '<td>' + escapeHtml(r.biggest_challenge || '—') + '</td>'
         + '<td>' + escapeHtml(r.phone || '—') + '</td>'
+        + '<td>' + escapeHtml(r.email) + '</td>'
         + '<td class="' + (r.newsletter_opt_in ? 'tag-yes' : 'tag-no') + '">' + (r.newsletter_opt_in ? 'Ja' : 'Nein') + '</td>'
         + '<td>' + fmtDate(r.created_at) + '</td>'
         + '</tr>';
@@ -395,7 +403,7 @@
         renderContacts(res.data || []);
       }).catch(function(err){
         console.error(err);
-        document.getElementById('contactsBody').innerHTML = '<tr class="empty-row"><td colspan="5">Fehler beim Laden.</td></tr>';
+        document.getElementById('contactsBody').innerHTML = '<tr class="empty-row"><td colspan="9">Fehler beim Laden.</td></tr>';
       });
 
     client.from('newsletter_subscribers').select('*').order('created_at', { ascending:false })
