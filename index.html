@@ -3,7 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Clarity Lab ist eine Prozess- und Systemberatung aus Österreich. Wir analysieren, wie Ihr Unternehmen wirklich arbeitet, und bauen Prozesse und Systeme, die diese Arbeit tragen.">
+<link rel="canonical" href="https://rdclarity.github.io/clarity-lab-website/index.html">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Clarity Lab">
+<meta property="og:title" content="Clarity Lab — Prozess- und Systemberatung">
+<meta property="og:description" content="Wir analysieren, wie Ihr Unternehmen wirklich arbeitet, und bauen Prozesse und Systeme, die diese Arbeit tragen, statt sie zu bremsen.">
+<meta property="og:url" content="https://rdclarity.github.io/clarity-lab-website/index.html">
+<meta property="og:locale" content="de_AT">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Clarity Lab — Prozess- und Systemberatung">
+<meta name="twitter:description" content="Wir analysieren, wie Ihr Unternehmen wirklich arbeitet, und bauen Prozesse und Systeme, die diese Arbeit tragen.">
 <title data-i18n="meta.title">Clarity Lab — Prozess- und Systemberatung</title>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Clarity Lab",
+  "description": "Prozess- und Systemberatung aus Österreich.",
+  "url": "https://rdclarity.github.io/clarity-lab-website/index.html",
+  "email": "inquiry@clarity-lab.com",
+  "telephone": "+43 660 3607188",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Royerstraße 7",
+    "postalCode": "2482",
+    "addressLocality": "Münchendorf",
+    "addressCountry": "AT"
+  },
+  "areaServed": "AT",
+  "sameAs": []
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -173,8 +205,37 @@
   .lang-btn:hover{ color: var(--ink); }
   .lang-btn.active{ color: var(--accent); font-weight:600; }
   .lang-sep{ color: var(--line); }
+  .nav-toggle{
+    display:none;
+    background:none;
+    border:none;
+    padding:6px;
+    margin:-6px;
+    color: var(--ink);
+    cursor:pointer;
+  }
+  .nav-toggle svg{ width:24px; height:24px; display:block; }
   @media (max-width: 780px){
-    .nav-links{ display:none; }
+    .nav-toggle{ display:block; }
+    .nav-right{
+      display:none;
+      position:absolute;
+      top:100%;
+      left:0;
+      right:0;
+      flex-direction:column;
+      align-items:stretch;
+      gap:0;
+      background: var(--paper);
+      border-bottom:1px solid var(--line);
+      padding:8px 22px 20px;
+      z-index:50;
+    }
+    .nav-right.mobile-open{ display:flex; }
+    .nav-links{ flex-direction:column; gap:0; font-size:0.98rem; }
+    .nav-links a{ padding:14px 0; border-bottom:1px solid var(--line); }
+    .lang-switch{ padding:16px 0; }
+    .nav-cta{ margin-top:8px; text-align:center; }
   }
 
   /* ---------- FOCUS RULER DIVIDER (signature motif) ---------- */
@@ -582,6 +643,9 @@
 <header>
   <div class="wrap nav">
     <a href="#" class="brand">Clarity<span class="dot">·</span>Lab</a>
+    <button type="button" class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
     <div class="nav-right">
       <nav class="nav-links">
         <a href="#methode" data-i18n="nav.methode">Methode</a>
@@ -810,7 +874,7 @@
     <span data-i18n="footer.copyright">© 2026 Clarity Lab. Alle Rechte vorbehalten.</span>
     <div class="footer-links">
       <a href="#" data-i18n="footer.impressum">Impressum</a>
-      <a href="#" data-i18n="footer.datenschutz">Datenschutz</a>
+      <a href="datenschutz.html" data-i18n="footer.datenschutz">Datenschutz</a>
     </div>
   </div>
 </footer>
@@ -886,6 +950,26 @@
   }
   document.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+
+  // Mobile menu toggle
+  const navToggle = document.querySelector('.nav-toggle');
+  const navRight = document.querySelector('.nav-right');
+  const menuIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+  const closeIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>';
+  function closeMobileMenu(){
+    navRight.classList.remove('mobile-open');
+    navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.innerHTML = menuIcon;
+  }
+  if(navToggle && navRight){
+    navToggle.addEventListener('click', () => {
+      const isOpen = navRight.classList.toggle('mobile-open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      navToggle.innerHTML = isOpen ? closeIcon : menuIcon;
+    });
+    navRight.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
+    window.addEventListener('resize', () => { if(window.innerWidth > 780) closeMobileMenu(); });
+  }
 
   // Scroll reveal, with staggered children where marked
   const revealEls = document.querySelectorAll('.reveal');

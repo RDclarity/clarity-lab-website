@@ -1,0 +1,17 @@
+# Clarity Lab
+
+> Clarity Lab ist eine Prozess- und Systemberatung aus Österreich (Wien / Münchendorf). Wir analysieren, wie Unternehmen wirklich arbeiten, und bauen Prozesse und Systeme, die diese Arbeit tragen statt sie zu bremsen. Methode: Diagnose vor Neugestaltung vor Umsetzung.
+
+## Seiten
+
+- [Startseite](https://rdclarity.github.io/clarity-lab-website/index.html): Methode, Leistungen (Prozessanalyse, Systemarchitektur, Organisationsdesign, Change-Begleitung, Kennzahlen & Steuerung, Interim-Mandate), Ergebnisse, Über uns, Kontakt
+- [Team](https://rdclarity.github.io/clarity-lab-website/team.html): Richard Dobrohruschka, Marko Katalan, Mihai Suta
+- [Referenz](https://rdclarity.github.io/clarity-lab-website/referenzen.html): Fallbeispiel Metallbau Hofer — Jahresumsatz von 500.000 € auf 750.000 € in 18 Monaten gesteigert
+- [Datenschutz](https://rdclarity.github.io/clarity-lab-website/datenschutz.html): Datenschutzerklärung
+
+## Kontakt
+
+- E-Mail: inquiry@clarity-lab.com
+- Telefon: +43 660 3607188
+- Adresse: Royerstraße 7, 2482 Münchendorf, Österreich
+- Termin buchen: über den "Termin buchen"-Button auf der Startseite
