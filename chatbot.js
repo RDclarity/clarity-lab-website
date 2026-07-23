@@ -212,6 +212,7 @@
     bookingChip.type = 'button';
     bookingChip.textContent = ui().bookingChip;
     bookingChip.addEventListener('click', function(){
+      if(window.clarityLogConversion) window.clarityLogConversion('booking_click');
       window.open(BOOKING_URL, '_blank', 'noopener');
     });
     chipsEl.appendChild(bookingChip);

@@ -36,6 +36,54 @@
   "sameAs": []
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Was macht Clarity Lab konkret?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Wir analysieren, wie Ihr Unternehmen wirklich arbeitet, und bauen Prozesse und Systeme, die diese Arbeit tragen — von der Prozessanalyse über Systemarchitektur bis zur Umsetzung im Alltag."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wie läuft eine Zusammenarbeit ab?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In drei Phasen: Diagnose (wir kartieren Abläufe und Engpässe), Neugestaltung (ein Zielbild mit klaren Verantwortlichkeiten) und Umsetzung (Begleitung, bis der neue Ablauf im Alltag trägt)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Was kostet das Erstgespräch?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nichts. Ein erstes Gespräch dauert 30 Minuten, ist unverbindlich und zeigt, ob und wo wir ansetzen sollten."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wie schnell zeigt sich eine Wirkung?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Im Schnitt nach 90 Tagen zeigt sich die erste messbare Wirkung im Betrieb."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Für welche Unternehmen eignet sich das?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Von Handwerksbetrieben bis mittelständischen Unternehmen — siehe zum Beispiel unser Fallbeispiel Metallbau Hofer, das den Jahresumsatz in 18 Monaten um 50 % steigerte."
+      }
+    }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -152,6 +200,11 @@
     align-items:center;
     gap:28px;
   }
+  .nav-collapse{
+    display:flex;
+    align-items:center;
+    gap:28px;
+  }
   .nav-links{
     display:flex;
     gap:36px;
@@ -217,7 +270,7 @@
   .nav-toggle svg{ width:24px; height:24px; display:block; }
   @media (max-width: 780px){
     .nav-toggle{ display:block; }
-    .nav-right{
+    .nav-collapse{
       display:none;
       position:absolute;
       top:100%;
@@ -231,11 +284,10 @@
       padding:8px 22px 20px;
       z-index:50;
     }
-    .nav-right.mobile-open{ display:flex; }
+    .nav-collapse.mobile-open{ display:flex; }
     .nav-links{ flex-direction:column; gap:0; font-size:0.98rem; }
     .nav-links a{ padding:14px 0; border-bottom:1px solid var(--line); }
     .lang-switch{ padding:16px 0; }
-    .nav-cta{ margin-top:8px; text-align:center; }
   }
 
   /* ---------- FOCUS RULER DIVIDER (signature motif) ---------- */
@@ -274,6 +326,7 @@
   .hero-item:nth-child(3){ animation-delay: .34s; }
   .hero-item:nth-child(4){ animation-delay: .48s; }
   .hero-item:nth-child(5){ animation-delay: .62s; }
+  .hero-item:nth-child(6){ animation-delay: .74s; }
   .eyebrow{
     font-size: 0.76rem;
     color: var(--accent-ink);
@@ -312,6 +365,11 @@
     align-items:center;
     gap: 28px;
     flex-wrap: wrap;
+  }
+  .hero-reassurance{
+    margin-top: 16px;
+    font-size: 0.8rem;
+    color: var(--slate-light);
   }
   .btn-primary{
     background: var(--ink);
@@ -514,6 +572,20 @@
     font-size: 0.86rem;
     color: #9BA3AB;
   }
+  .ergebnisse-cta{
+    margin-top: 48px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color: var(--paper);
+    border-bottom: 1px solid #33383D;
+    padding-bottom: 4px;
+    font-size: 0.94rem;
+    transition: border-color .2s ease, color .2s ease;
+  }
+  .ergebnisse-cta:hover{ border-color: var(--accent); color: var(--accent); }
+  .ergebnisse-cta .arrow{ display:inline-block; transition: transform .3s cubic-bezier(.2,.7,.2,1); }
+  .ergebnisse-cta:hover .arrow{ transform: translateX(4px); }
 
   /* ---------- UEBER ---------- */
   .ueber .wrap{
@@ -548,6 +620,32 @@
     .principle{ flex-direction:column; gap:6px; }
     .principle .p-desc{ text-align:left; }
   }
+
+  /* ---------- FAQ ---------- */
+  .faq-list{ display:flex; flex-direction:column; }
+  .faq-item{ border-top: 1px solid var(--line); padding: 22px 2px; }
+  .faq-item:last-child{ border-bottom: 1px solid var(--line); }
+  .faq-item summary{
+    cursor:pointer;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:1.02rem;
+    list-style:none;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+  }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-item summary::after{
+    content:'+';
+    color: var(--accent);
+    font-size:1.4rem;
+    font-weight:400;
+    flex-shrink:0;
+  }
+  .faq-item[open] summary::after{ content:'−'; }
+  .faq-item p{ margin-top:14px; color: var(--slate); font-size:0.94rem; max-width:64ch; }
 
   /* ---------- KONTAKT ---------- */
   .kontakt-inner{
@@ -643,22 +741,24 @@
 <header>
   <div class="wrap nav">
     <a href="#" class="brand">Clarity<span class="dot">·</span>Lab</a>
-    <button type="button" class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    </button>
     <div class="nav-right">
-      <nav class="nav-links">
-        <a href="#methode" data-i18n="nav.methode">Methode</a>
-        <a href="#leistungen" data-i18n="nav.leistungen">Leistungen</a>
-        <a href="#ergebnisse" data-i18n="nav.ergebnisse">Ergebnisse</a>
-        <a href="#ueber" data-i18n="nav.ueber">Über uns</a>
-        <a href="team.html" data-i18n="nav.team">Team</a>
-        <a href="referenzen.html" data-i18n="nav.referenzen">Referenzen</a>
-      </nav>
-      <div class="lang-switch">
-        <button type="button" class="lang-btn" data-lang="de">DE</button>
-        <span class="lang-sep">/</span>
-        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      <button type="button" class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="nav-collapse">
+        <nav class="nav-links">
+          <a href="#methode" data-i18n="nav.methode">Methode</a>
+          <a href="#leistungen" data-i18n="nav.leistungen">Leistungen</a>
+          <a href="#ergebnisse" data-i18n="nav.ergebnisse">Ergebnisse</a>
+          <a href="#ueber" data-i18n="nav.ueber">Über uns</a>
+          <a href="team.html" data-i18n="nav.team">Team</a>
+          <a href="referenzen.html" data-i18n="nav.referenzen">Referenzen</a>
+        </nav>
+        <div class="lang-switch">
+          <button type="button" class="lang-btn" data-lang="de">DE</button>
+          <span class="lang-sep">/</span>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
       </div>
       <a href="#kontakt" class="nav-cta" data-i18n="nav.cta">Erstgespräch</a>
     </div>
@@ -674,6 +774,7 @@
       <a href="#kontakt" class="btn-primary" data-i18n="hero.cta1">Erstgespräch vereinbaren</a>
       <a href="#methode" class="link-secondary"><span data-i18n="hero.cta2">Unsere Methode ansehen</span><span class="arrow">→</span></a>
     </div>
+    <p class="hero-reassurance hero-item" data-i18n="hero.reassurance">Kostenlos & unverbindlich · 30 Minuten · Antwort innerhalb von 2 Werktagen</p>
     <div class="hero-meta hero-item">
       <div><strong data-count="40" data-suffix="+">0</strong><span data-i18n="hero.meta1">begleitete Transformationen</span></div>
       <div><strong data-count="90" data-suffix=" Tage" data-i18n-suffix="common.day_suffix">0</strong><span data-i18n="hero.meta2">bis zur ersten messbaren Wirkung</span></div>
@@ -798,6 +899,10 @@
         <div class="label" data-i18n="ergebnisse.stat3">begleitete Transformationen seit Gründung</div>
       </div>
     </div>
+    <a href="referenzen.html" class="ergebnisse-cta reveal">
+      <span data-i18n="ergebnisse.case_link">Fallbeispiel lesen: Wie Metallbau Hofer den Umsatz in 18 Monaten um 50 % steigerte</span>
+      <span class="arrow">→</span>
+    </a>
   </div>
 </section>
 
@@ -829,10 +934,44 @@
   </div>
 </section>
 
+<section id="faq" data-bg="#F6F7F4">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="section-label mono" data-i18n="faq.label">05 — FAQ</div>
+        <h2 class="display" data-i18n="faq.h2">Häufige Fragen</h2>
+      </div>
+      <p data-i18n="faq.p">Was Sie vor einem Erstgespräch wissen sollten.</p>
+    </div>
+    <div class="faq-list reveal">
+      <details class="faq-item">
+        <summary data-i18n="faq.q1">Was macht Clarity Lab konkret?</summary>
+        <p data-i18n="faq.a1">Wir analysieren, wie Ihr Unternehmen wirklich arbeitet, und bauen Prozesse und Systeme, die diese Arbeit tragen — von der Prozessanalyse über Systemarchitektur bis zur Umsetzung im Alltag.</p>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q2">Wie läuft eine Zusammenarbeit ab?</summary>
+        <p data-i18n="faq.a2">In drei Phasen: Diagnose (wir kartieren Abläufe und Engpässe), Neugestaltung (ein Zielbild mit klaren Verantwortlichkeiten) und Umsetzung (Begleitung, bis der neue Ablauf im Alltag trägt).</p>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q3">Was kostet das Erstgespräch?</summary>
+        <p data-i18n="faq.a3">Nichts. Ein erstes Gespräch dauert 30 Minuten, ist unverbindlich und zeigt, ob und wo wir ansetzen sollten.</p>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q4">Wie schnell zeigt sich eine Wirkung?</summary>
+        <p data-i18n="faq.a4">Im Schnitt nach 90 Tagen zeigt sich die erste messbare Wirkung im Betrieb.</p>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q5">Für welche Unternehmen eignet sich das?</summary>
+        <p data-i18n="faq.a5">Von Handwerksbetrieben bis mittelständischen Unternehmen — siehe zum Beispiel unser Fallbeispiel Metallbau Hofer, das den Jahresumsatz in 18 Monaten um 50 % steigerte.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
 <section id="kontakt" class="kontakt" data-bg="#E6EBFB">
   <div class="wrap kontakt-inner">
     <div class="reveal">
-      <div class="section-label mono" data-i18n="kontakt.label">05 — KONTAKT</div>
+      <div class="section-label mono" data-i18n="kontakt.label">06 — KONTAKT</div>
       <h2 data-i18n="kontakt.h2">Bereit für Klarheit?</h2>
       <p class="kontakt-copy" data-i18n="kontakt.copy">Ein erstes Gespräch dauert 30 Minuten und zeigt, ob und wo wir ansetzen sollten. Unverbindlich.</p>
       <a href="https://outlook.office.com/bookwithme/user/dc79bf543acd4612bd3cd71f5b078ae2@tischlerkultur.onmicrosoft.com/meetingtype/Lf7qqrACrkGmDArzLF0Lvw2?anonymous&ismsaljsauthenabled&ep=mlink" target="_blank" rel="noopener noreferrer" class="btn-primary booking-btn" data-i18n="kontakt.book_btn">Termin buchen</a>
@@ -953,21 +1092,21 @@
 
   // Mobile menu toggle
   const navToggle = document.querySelector('.nav-toggle');
-  const navRight = document.querySelector('.nav-right');
+  const navCollapse = document.querySelector('.nav-collapse');
   const menuIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
   const closeIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>';
   function closeMobileMenu(){
-    navRight.classList.remove('mobile-open');
+    navCollapse.classList.remove('mobile-open');
     navToggle.setAttribute('aria-expanded', 'false');
     navToggle.innerHTML = menuIcon;
   }
-  if(navToggle && navRight){
+  if(navToggle && navCollapse){
     navToggle.addEventListener('click', () => {
-      const isOpen = navRight.classList.toggle('mobile-open');
+      const isOpen = navCollapse.classList.toggle('mobile-open');
       navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       navToggle.innerHTML = isOpen ? closeIcon : menuIcon;
     });
-    navRight.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
+    navCollapse.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
     window.addEventListener('resize', () => { if(window.innerWidth > 780) closeMobileMenu(); });
   }
 

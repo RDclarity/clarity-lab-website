@@ -12,7 +12,8 @@
         cta2: 'Unsere Methode ansehen',
         meta1: 'begleitete Transformationen',
         meta2: 'bis zur ersten messbaren Wirkung',
-        meta3: 'Durchlaufzeit im Schnitt'
+        meta3: 'Durchlaufzeit im Schnitt',
+        reassurance: 'Kostenlos & unverbindlich · 30 Minuten · Antwort innerhalb von 2 Werktagen'
       },
       methode: {
         label: '01 — METHODE',
@@ -48,7 +49,8 @@
         p: 'Wirkung, die sich messen lässt — nicht nur beschreiben.',
         stat1: 'durchschnittliche Reduktion der Durchlaufzeit',
         stat2: 'bis zur ersten messbaren Wirkung im Betrieb',
-        stat3: 'begleitete Transformationen seit Gründung'
+        stat3: 'begleitete Transformationen seit Gründung',
+        case_link: 'Fallbeispiel lesen: Wie Metallbau Hofer den Umsatz in 18 Monaten um 50 % steigerte'
       },
       ueber: {
         label: '04 — ÜBER UNS',
@@ -63,8 +65,23 @@
         pr4_name: 'Wirkung vor Bericht',
         pr4_desc: 'Erfolg zeigt sich im Alltag, nicht in der Präsentation.'
       },
+      faq: {
+        label: '05 — FAQ',
+        h2: 'Häufige Fragen',
+        p: 'Was Sie vor einem Erstgespräch wissen sollten.',
+        q1: 'Was macht Clarity Lab konkret?',
+        a1: 'Wir analysieren, wie Ihr Unternehmen wirklich arbeitet, und bauen Prozesse und Systeme, die diese Arbeit tragen — von der Prozessanalyse über Systemarchitektur bis zur Umsetzung im Alltag.',
+        q2: 'Wie läuft eine Zusammenarbeit ab?',
+        a2: 'In drei Phasen: Diagnose (wir kartieren Abläufe und Engpässe), Neugestaltung (ein Zielbild mit klaren Verantwortlichkeiten) und Umsetzung (Begleitung, bis der neue Ablauf im Alltag trägt).',
+        q3: 'Was kostet das Erstgespräch?',
+        a3: 'Nichts. Ein erstes Gespräch dauert 30 Minuten, ist unverbindlich und zeigt, ob und wo wir ansetzen sollten.',
+        q4: 'Wie schnell zeigt sich eine Wirkung?',
+        a4: 'Im Schnitt nach 90 Tagen zeigt sich die erste messbare Wirkung im Betrieb.',
+        q5: 'Für welche Unternehmen eignet sich das?',
+        a5: 'Von Handwerksbetrieben bis mittelständischen Unternehmen — siehe zum Beispiel unser Fallbeispiel Metallbau Hofer, das den Jahresumsatz in 18 Monaten um 50 % steigerte.'
+      },
       kontakt: {
-        label: '05 — KONTAKT',
+        label: '06 — KONTAKT',
         h2: 'Bereit für Klarheit?',
         copy: 'Ein erstes Gespräch dauert 30 Minuten und zeigt, ob und wo wir ansetzen sollten. Unverbindlich.',
         book_btn: 'Termin buchen',
@@ -89,7 +106,10 @@
         eyebrow: 'TEAM — CLARITY LAB',
         h1: 'Die Menschen hinter der Methode.',
         sub: 'Drei Perspektiven, ein Anspruch: Prozesse und Systeme so gestalten, dass sie im Alltag tatsächlich tragen.',
-        role_pending: 'Rolle folgt'
+        role_pending: 'Rolle folgt',
+        cta_h: 'Bereit für den nächsten Schritt?',
+        cta_sub: 'Kostenloses Erstgespräch · 30 Minuten · unverbindlich',
+        cta_btn: 'Erstgespräch vereinbaren'
       },
       ref_page: {
         meta_title: 'Referenz — Clarity Lab',
@@ -163,7 +183,8 @@
         cta2: 'See our method',
         meta1: 'guided transformations',
         meta2: 'to first measurable impact',
-        meta3: 'average lead time reduction'
+        meta3: 'average lead time reduction',
+        reassurance: 'Free & no obligation · 30 minutes · reply within 2 business days'
       },
       methode: {
         label: '01 — METHOD',
@@ -199,7 +220,8 @@
         p: 'Impact that can be measured — not just described.',
         stat1: 'average reduction in lead time',
         stat2: 'to first measurable impact in operations',
-        stat3: 'guided transformations since founding'
+        stat3: 'guided transformations since founding',
+        case_link: 'Read the case study: how Metallbau Hofer grew revenue 50% in 18 months'
       },
       ueber: {
         label: '04 — ABOUT US',
@@ -214,8 +236,23 @@
         pr4_name: 'Impact over reporting',
         pr4_desc: 'Success shows up in daily work, not in the presentation.'
       },
+      faq: {
+        label: '05 — FAQ',
+        h2: 'Frequently asked questions',
+        p: 'What to know before your first conversation.',
+        q1: 'What does Clarity Lab actually do?',
+        a1: 'We analyze how your company actually works, and build processes and systems that support that work — from process analysis through system architecture to implementation in daily practice.',
+        q2: 'How does a project typically proceed?',
+        a2: 'In three phases: Diagnosis (we map workflows and bottlenecks), Redesign (a target picture with clear responsibilities), and Implementation (support until the new workflow holds up in daily practice).',
+        q3: 'What does the initial consultation cost?',
+        a3: 'Nothing. An initial conversation takes 30 minutes, is non-binding, and shows whether — and where — we should start.',
+        q4: 'How quickly does impact show up?',
+        a4: 'On average, the first measurable impact shows up in operations after 90 days.',
+        q5: 'What kind of companies is this a fit for?',
+        a5: 'From trade businesses to mid-sized companies — see for example our case study on Metallbau Hofer, which grew annual revenue 50% in 18 months.'
+      },
       kontakt: {
-        label: '05 — CONTACT',
+        label: '06 — CONTACT',
         h2: 'Ready for clarity?',
         copy: 'An initial conversation takes 30 minutes and shows whether — and where — we should start. No obligation.',
         book_btn: 'Book a meeting',
@@ -240,7 +277,10 @@
         eyebrow: 'TEAM — CLARITY LAB',
         h1: 'The people behind the method.',
         sub: 'Three perspectives, one standard: designing processes and systems that actually hold up in daily practice.',
-        role_pending: 'Role to be announced'
+        role_pending: 'Role to be announced',
+        cta_h: 'Ready for the next step?',
+        cta_sub: 'Free consultation · 30 minutes · no obligation',
+        cta_btn: 'Schedule a consultation'
       },
       ref_page: {
         meta_title: 'Case Study — Clarity Lab',

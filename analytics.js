@@ -18,6 +18,21 @@
 
   var sessionId = genId();
   var startTime = Date.now();
+  window.CLARITY_SESSION_ID = sessionId;
+
+  window.clarityLogConversion = function(eventType){
+    if(!window.CLARITY_SUPABASE) return;
+    fetch(window.CLARITY_SUPABASE.url + '/rest/v1/conversion_events', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': window.CLARITY_SUPABASE.anonKey,
+        'Authorization': 'Bearer ' + window.CLARITY_SUPABASE.anonKey
+      },
+      body: JSON.stringify({ session_id: sessionId, event_type: eventType, page: location.pathname }),
+      keepalive: true
+    }).catch(function(){});
+  };
 
   window.claritySupabaseReady(function(client){
     if(!client) return;
@@ -50,4 +65,9 @@
     if(document.visibilityState === 'hidden'){ sendDuration(); }
   });
   window.addEventListener('pagehide', sendDuration);
+
+  // Track clicks on any booking button present on the page
+  document.querySelectorAll('.booking-btn').forEach(function(el){
+    el.addEventListener('click', function(){ window.clarityLogConversion('booking_click'); });
+  });
 })();

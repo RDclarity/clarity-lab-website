@@ -141,6 +141,9 @@
   }
   .summary-card .num{ font-family:'Space Grotesk', sans-serif; font-size:1.4rem; font-weight:600; }
   .summary-card .lbl{ font-size:0.76rem; color: var(--slate); margin-top:2px; }
+  .summary-card.highlight{ background: var(--accent-dim); }
+  .summary-card.highlight .num{ color: var(--accent-ink); }
+  .summary-card.highlight .lbl{ color: var(--accent-ink); }
   table{ width:100%; border-collapse: collapse; font-size:0.88rem; }
   thead th{
     text-align:left;
@@ -346,7 +349,7 @@
     }).join('');
   }
 
-  function renderAnalytics(visits, durationsBySession){
+  function renderAnalytics(visits, durationsBySession, conversions){
     var summaryEl = document.getElementById('analyticsSummary');
     var body = document.getElementById('analyticsBody');
 
@@ -354,10 +357,17 @@
     visits.forEach(function(v){
       deviceCounts[v.device_type] = (deviceCounts[v.device_type] || 0) + 1;
     });
+
+    var visitSessions = new Set(visits.map(function(v){ return v.session_id; }));
+    var convertedSessions = new Set((conversions || []).map(function(c){ return c.session_id; }));
+    var conversionRate = visitSessions.size > 0 ? (convertedSessions.size / visitSessions.size * 100) : 0;
+
     var summaryHtml = '<div class="summary-card"><div class="num">' + visits.length + '</div><div class="lbl">Seitenaufrufe</div></div>';
     Object.keys(deviceCounts).sort().forEach(function(device){
       summaryHtml += '<div class="summary-card"><div class="num">' + deviceCounts[device] + '</div><div class="lbl">' + escapeHtml(device) + '</div></div>';
     });
+    summaryHtml += '<div class="summary-card highlight"><div class="num">' + (conversions || []).length + '</div><div class="lbl">Conversions (Buchung/Formular)</div></div>';
+    summaryHtml += '<div class="summary-card highlight"><div class="num">' + conversionRate.toFixed(1) + '%</div><div class="lbl">Conversion-Rate (Sessions)</div></div>';
     summaryEl.innerHTML = summaryHtml;
 
     if(visits.length === 0){
@@ -397,17 +407,21 @@
 
     Promise.all([
       client.from('page_visits').select('*').order('created_at', { ascending:false }).limit(300),
-      client.from('page_visit_durations').select('session_id, duration_seconds')
+      client.from('page_visit_durations').select('session_id, duration_seconds'),
+      client.from('conversion_events').select('*').order('created_at', { ascending:false })
+        .then(function(res){ return res; })
+        .catch(function(){ return { data: [], error: null }; })
     ]).then(function(results){
-      var visitsRes = results[0], durationsRes = results[1];
+      var visitsRes = results[0], durationsRes = results[1], conversionsRes = results[2];
       if(visitsRes.error) throw visitsRes.error;
       if(durationsRes.error) throw durationsRes.error;
+      if(conversionsRes.error){ console.warn('conversion_events not available yet', conversionsRes.error); conversionsRes = { data: [] }; }
       var durationsBySession = {};
       (durationsRes.data || []).forEach(function(d){
         var current = durationsBySession[d.session_id] || 0;
         durationsBySession[d.session_id] = Math.max(current, d.duration_seconds);
       });
-      renderAnalytics(visitsRes.data || [], durationsBySession);
+      renderAnalytics(visitsRes.data || [], durationsBySession, conversionsRes.data || []);
     }).catch(function(err){
       console.error(err);
       document.getElementById('analyticsBody').innerHTML = '<tr class="empty-row"><td colspan="5">Fehler beim Laden.</td></tr>';

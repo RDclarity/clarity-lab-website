@@ -130,6 +130,7 @@
   }
   .brand .dot{ color: var(--accent); }
   .nav-right{ display:flex; align-items:center; gap:28px; }
+  .nav-collapse{ display:flex; align-items:center; gap:28px; }
   .nav-links{ display:flex; gap:36px; font-size:0.88rem; }
   .nav-links a{ color: var(--slate); }
   .nav-links a:hover{ color: var(--ink); }
@@ -172,7 +173,7 @@
   .nav-toggle svg{ width:24px; height:24px; display:block; }
   @media (max-width: 780px){
     .nav-toggle{ display:block; }
-    .nav-right{
+    .nav-collapse{
       display:none;
       position:absolute;
       top:100%;
@@ -186,11 +187,10 @@
       padding:8px 22px 20px;
       z-index:50;
     }
-    .nav-right.mobile-open{ display:flex; }
+    .nav-collapse.mobile-open{ display:flex; }
     .nav-links{ flex-direction:column; gap:0; font-size:0.98rem; }
     .nav-links a{ padding:14px 0; border-bottom:1px solid var(--line); }
     .lang-switch{ padding:16px 0; }
-    .nav-cta{ margin-top:8px; text-align:center; }
   }
 
   /* ---------- HERO ---------- */
@@ -260,22 +260,24 @@
 <header>
   <div class="nav">
     <a href="index.html" class="brand">Clarity<span class="dot">·</span>Lab</a>
-    <button type="button" class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    </button>
     <div class="nav-right">
-      <nav class="nav-links">
-        <a href="index.html#methode" data-i18n="nav.methode">Methode</a>
-        <a href="index.html#leistungen" data-i18n="nav.leistungen">Leistungen</a>
-        <a href="index.html#ergebnisse" data-i18n="nav.ergebnisse">Ergebnisse</a>
-        <a href="index.html#ueber" data-i18n="nav.ueber">Über uns</a>
-        <a href="team.html" data-i18n="nav.team">Team</a>
-        <a href="referenzen.html" data-i18n="nav.referenzen">Referenzen</a>
-      </nav>
-      <div class="lang-switch">
-        <button type="button" class="lang-btn" data-lang="de">DE</button>
-        <span class="lang-sep">/</span>
-        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      <button type="button" class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="nav-collapse">
+        <nav class="nav-links">
+          <a href="index.html#methode" data-i18n="nav.methode">Methode</a>
+          <a href="index.html#leistungen" data-i18n="nav.leistungen">Leistungen</a>
+          <a href="index.html#ergebnisse" data-i18n="nav.ergebnisse">Ergebnisse</a>
+          <a href="index.html#ueber" data-i18n="nav.ueber">Über uns</a>
+          <a href="team.html" data-i18n="nav.team">Team</a>
+          <a href="referenzen.html" data-i18n="nav.referenzen">Referenzen</a>
+        </nav>
+        <div class="lang-switch">
+          <button type="button" class="lang-btn" data-lang="de">DE</button>
+          <span class="lang-sep">/</span>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
       </div>
       <a href="index.html#kontakt" class="nav-cta" data-i18n="nav.cta">Erstgespräch</a>
     </div>
@@ -366,21 +368,21 @@
 
   // Mobile menu toggle
   const navToggle = document.querySelector('.nav-toggle');
-  const navRight = document.querySelector('.nav-right');
+  const navCollapse = document.querySelector('.nav-collapse');
   const menuIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
   const closeIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>';
   function closeMobileMenu(){
-    navRight.classList.remove('mobile-open');
+    navCollapse.classList.remove('mobile-open');
     navToggle.setAttribute('aria-expanded', 'false');
     navToggle.innerHTML = menuIcon;
   }
-  if(navToggle && navRight){
+  if(navToggle && navCollapse){
     navToggle.addEventListener('click', () => {
-      const isOpen = navRight.classList.toggle('mobile-open');
+      const isOpen = navCollapse.classList.toggle('mobile-open');
       navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       navToggle.innerHTML = isOpen ? closeIcon : menuIcon;
     });
-    navRight.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
+    navCollapse.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
     window.addEventListener('resize', () => { if(window.innerWidth > 780) closeMobileMenu(); });
   }
 </script>

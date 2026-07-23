@@ -61,6 +61,7 @@
       }).then(function(){
         form.reset();
         showNote(currentStrings().form_success || 'Thank you.', false);
+        if(window.clarityLogConversion) window.clarityLogConversion('form_submit');
       }).catch(function(err){
         console.error(err);
         showNote(currentStrings().form_error || 'Something went wrong.', true);
