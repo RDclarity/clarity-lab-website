@@ -239,7 +239,7 @@
   </div>
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.8/dist/umd/supabase.js"></script>
 <script src="supabase-config.js"></script>
 <script>
   var loginView = document.getElementById('loginView');
@@ -275,6 +275,8 @@
 
   function csvEscape(val){
     var str = val == null ? '' : String(val);
+    // Neutralize leading formula characters (CSV/Excel formula injection)
+    if(/^[=+\-@\t\r]/.test(str)) str = "'" + str;
     if(/[",\n;]/.test(str)) return '"' + str.replace(/"/g, '""') + '"';
     return str;
   }
